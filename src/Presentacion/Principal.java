@@ -14,9 +14,6 @@ public class Principal {
 	private Galeria galeria;
 
 	public Principal() {
-		this.comprador = new Comprador();
-		this.administrador = new Administrador();
-		this.empleado = new Empleado();
 		this.galeria = new Galeria();
 		menu();
 	}
