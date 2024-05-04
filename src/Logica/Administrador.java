@@ -22,7 +22,9 @@ public class Administrador extends Usuario {
         this.contrasena = contrasena;
         this.login = login;
         this.compradoresVerificados = new HashMap<>();
-    }
+        this.compradores = new HashMap<>();
+        this.inventarioHistorico = new HashMap<>();    
+        }
 
     // Verificar un comprador
     public void verificarComprador(Comprador comprador) {

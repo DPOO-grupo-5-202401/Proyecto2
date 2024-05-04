@@ -38,7 +38,7 @@ public class Padministrador {
 						String login = sc.next();
 						String contrasena = sc.next();
 						administrador.crearComprador(nombre, contacto, contrasena, login);
-						System.out.println();
+						System.out.println("Comprador " + login + " creado con exito");
 					}else if(op == 2) {
 	
 						System.out.println("Se han registrado 4 piezas");
