@@ -9,6 +9,47 @@ import java.util.Random;
 
 public class Administrador extends Usuario {
 	
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public HashMap<String, Comprador> getCompradoresVerificados() {
+		return compradoresVerificados;
+	}
+
+	public void setCompradoresVerificados(HashMap<String, Comprador> compradoresVerificados) {
+		this.compradoresVerificados = compradoresVerificados;
+	}
+
+	public HashMap<String, Pieza> getInventarioHistorico() {
+		return inventarioHistorico;
+	}
+
+	public void setInventarioHistorico(HashMap<String, Pieza> inventarioHistorico) {
+		this.inventarioHistorico = inventarioHistorico;
+	}
+
+	public HashMap<String, Comprador> getCompradores() {
+		return compradores;
+	}
+
+	public void setCompradores(HashMap<String, Comprador> compradores) {
+		this.compradores = compradores;
+	}
+
+
 	private String contrasena;
 	private String login;
     private HashMap<String, Comprador> compradoresVerificados;
@@ -36,6 +77,61 @@ public class Administrador extends Usuario {
 		Comprador nuevoComprador = new Comprador(nombre,numeroDeContacto,contrasena,login); 
 		this.compradores.put(nuevoComprador.getLogin(),nuevoComprador);
 	}
+	
+	// Crear Video
+	public void crearVideo(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
+			Logica.Autor autor, int resolucion, int duracion) {
+		
+		Video nuevoVideo = new Video(id,titulo,año,lugarDeCreacion,enExhibicion,FechaEntradaGaleria,FechaSalidaGaleria,EstadoActual,ValorFijo,
+				ValorInicial,ValorMinimo,Valor,DueñoActual,peso,observacion,autor,resolucion,duracion);
+		this.inventarioHistorico.put(nuevoVideo.getId(),nuevoVideo);
+	}
+	
+	
+	//Crear Pintura
+	public void crearPintura(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
+			Autor autor, String tecnica, String estilo, int altura, int ancho) {
+		
+		Pintura nuevaPintura = new Pintura(id,titulo,año,lugarDeCreacion,enExhibicion,
+				FechaEntradaGaleria,FechaSalidaGaleria,EstadoActual,ValorFijo,
+				ValorInicial, ValorMinimo,Valor,DueñoActual,peso, observacion,
+				autor, tecnica,estilo,altura,ancho);
+		
+		this.inventarioHistorico.put(nuevaPintura.getId(),nuevaPintura);
+	}
+	
+	//Crear Escultura
+	public void crearEscultura(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
+			Autor autor, double largo, double ancho, double alto, boolean electricidad, String material) {
+		
+		Escultura nuevaEscultura = new Escultura(id, titulo, año, lugarDeCreacion, enExhibicion,
+				FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual, ValorFijo,
+				ValorInicial, ValorMinimo, Valor, DueñoActual,peso,observacion,
+				autor, largo, ancho, alto,electricidad, material);
+		this.inventarioHistorico.put(nuevaEscultura.getId(),nuevaEscultura);
+	}
+	
+	
+	//Crear Fotografia
+	public void crearFotografia(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
+			Autor autor, int resolucion, String tipo) {
+		
+		Fotografia nuevaFotografia = new Fotografia(id, titulo, año, lugarDeCreacion, enExhibicion,
+				FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual, ValorFijo,
+				ValorInicial, ValorMinimo, Valor, DueñoActual,peso,observacion,
+				autor, resolucion,tipo);
+		this.inventarioHistorico.put(nuevaFotografia.getId(),nuevaFotografia);
+	}
+	
+	
 	
 	
 	

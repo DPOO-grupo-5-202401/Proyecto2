@@ -17,7 +17,7 @@ public class Subasta {
 		super();
 		this.fecha = fecha;
 		this.pujaActual = 0;
-		this.compradorFinal = new Comprador("No Registra",000000000);
+		this.compradorFinal = new Comprador("No Registra",000000000,"AA","AA");
 		this.administrador = administrador;
 		this.pieza = pieza;
 		this.compradoresValidados = compradoresValidados;

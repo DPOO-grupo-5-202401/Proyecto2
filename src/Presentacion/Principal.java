@@ -5,16 +5,13 @@ import java.util.Scanner;
 import Logica.Administrador;
 import Logica.Comprador;
 import Logica.Empleado;
-import Logica.Galeria;
 
 public class Principal {
 	private Comprador comprador;
 	private Administrador administrador;
 	private Empleado empleado;
-	private Galeria galeria;
 
 	public Principal() {
-		this.galeria = new Galeria();
 		menu();
 	}
 	

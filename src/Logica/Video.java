@@ -8,7 +8,7 @@ public class Video extends Pieza {
 	public Video(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
 			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
 			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
-			Logica.Autor autor, int resolucion, int duracion) {
+			Autor autor, int resolucion, int duracion) {
 		super(id, titulo, año, lugarDeCreacion, enExhibicion, FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual,
 				ValorFijo, ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor);
 		this.resolucion = resolucion;
