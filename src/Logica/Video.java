@@ -9,7 +9,7 @@ public class Video extends Pieza {
 			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
 			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
 			Autor autor, int resolucion, int duracion) {
-		super(id, titulo, año, lugarDeCreacion, enExhibicion, FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual,
+		super(id, año, lugarDeCreacion, enExhibicion, FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual,
 				ValorFijo, ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor);
 		this.resolucion = resolucion;
 		this.duracion = duracion;

@@ -9,6 +9,18 @@ import java.util.Random;
 
 public class Administrador extends Usuario {
 	
+	//Atributos
+	private String contrasena;
+	private String login;
+    private HashMap<String, Comprador> compradoresVerificados;
+	public HashMap<String, Pieza> inventarioHistorico;
+	public HashMap<String, Comprador> compradores;
+	public HashMap<String, Autor> autores;
+	
+	
+
+
+	//Metodos
 	public String getContrasena() {
 		return contrasena;
 	}
@@ -48,13 +60,17 @@ public class Administrador extends Usuario {
 	public void setCompradores(HashMap<String, Comprador> compradores) {
 		this.compradores = compradores;
 	}
+	
+	public HashMap<String, Autor> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(HashMap<String, Autor> autores) {
+		this.autores = autores;
+	}
 
 
-	private String contrasena;
-	private String login;
-    private HashMap<String, Comprador> compradoresVerificados;
-	public HashMap<String, Pieza> inventarioHistorico;
-	public HashMap<String, Comprador> compradores;
+
     
 	
     // Constructor
@@ -64,7 +80,8 @@ public class Administrador extends Usuario {
         this.login = login;
         this.compradoresVerificados = new HashMap<>();
         this.compradores = new HashMap<>();
-        this.inventarioHistorico = new HashMap<>();    
+        this.inventarioHistorico = new HashMap<>();
+        this.autores = new HashMap<>();
         }
 
     // Verificar un comprador
@@ -76,6 +93,19 @@ public class Administrador extends Usuario {
 	public void crearComprador(String nombre, int numeroDeContacto, String contrasena, String login) {
 		Comprador nuevoComprador = new Comprador(nombre,numeroDeContacto,contrasena,login); 
 		this.compradores.put(nuevoComprador.getLogin(),nuevoComprador);
+	}
+	
+	
+    //Crear Autor
+	public void crearAutor(String nombre) {
+		Autor nuevoAutor = new Autor(nombre); 
+		this.autores.put(nuevoAutor.getId(),nuevoAutor);
+	}
+	
+	public Autor crearRetornarAutor(String nombre) {
+		Autor nuevoAutor = new Autor(nombre); 
+		this.autores.put(nuevoAutor.getId(),nuevoAutor);
+		return nuevoAutor;
 	}
 	
 	// Crear Video
@@ -105,15 +135,18 @@ public class Administrador extends Usuario {
 	}
 	
 	//Crear Escultura
-	public void crearEscultura(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
-			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
-			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
-			Autor autor, double largo, double ancho, double alto, boolean electricidad, String material) {
+	public void crearEscultura(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
+    		String EstadoActual,
+    		boolean ValorFijo,int ValorInicial,int ValorMinimo,int Valor,
+    		Comprador DueñoActual, int peso,String observacion,Autor autor, String fechaSalidaGaleria, double alto,
+    		double ancho, double largo, boolean electricidad, String material) {
 		
-		Escultura nuevaEscultura = new Escultura(id, titulo, año, lugarDeCreacion, enExhibicion,
-				FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual, ValorFijo,
-				ValorInicial, ValorMinimo, Valor, DueñoActual,peso,observacion,
-				autor, largo, ancho, alto,electricidad, material);
+		Escultura nuevaEscultura = new Escultura(titulo,año,lugarDeCreacion,enExhibicion, 
+	    		EstadoActual,
+	    		ValorFijo,ValorInicial,ValorMinimo,Valor,
+	    		DueñoActual,peso,observacion,autor,fechaSalidaGaleria,alto,
+	    		ancho, largo, electricidad, material);
+		
 		this.inventarioHistorico.put(nuevaEscultura.getId(),nuevaEscultura);
 	}
 	

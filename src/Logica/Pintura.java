@@ -39,7 +39,7 @@ public class Pintura extends Pieza{
 			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
 			Autor autor, String tecnica, String estilo, int altura, int ancho) {
 		
-		super(id, titulo, año, lugarDeCreacion, enExhibicion, FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual,
+		super(titulo, año, lugarDeCreacion, enExhibicion, FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual,
 				ValorFijo, ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor);
 		this.tecnica = tecnica;
 		this.estilo = estilo;

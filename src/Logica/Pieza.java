@@ -1,5 +1,7 @@
 package Logica;
-
+import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -21,6 +23,42 @@ public abstract class Pieza {
     protected Autor autor;
     private double peso;
     private String observacion;
+    
+    public Pieza(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
+    		String EstadoActual,
+    		boolean ValorFijo,int ValorInicial,int ValorMinimo,int Valor,
+    		Comprador DueñoActual, int peso,String observacion,Autor autor, String FechaSalidaGaleria) {
+    	
+    	Random random = new Random();
+    	int randomNumber = random.nextInt(100) + 10;
+    	this.id= "PI" + randomNumber;
+    	
+    	
+    	this.titulo= titulo;
+    	this.año= año;
+    	this.lugarDeCreacion= lugarDeCreacion;
+    	
+    	this.enExhibicion= enExhibicion;
+    	
+    	Date currentDate = new Date();
+    	
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    	String dateString = formatter.format(currentDate);
+    	
+    	this.fechaEntradaGaleria= dateString;
+    	
+    	
+    	this.fechaSalidaGaleria= FechaSalidaGaleria;
+    	this.estadoActual= EstadoActual;
+    	this.valorFijo= ValorFijo;
+    	this.valorInicial= ValorInicial;
+    	this.valorMinimo= ValorMinimo;
+    	this.valor= Valor;
+    	this.DueñoActual= DueñoActual;
+    	this.peso=peso;
+    	this.observacion=observacion;
+    	this.autor=autor;
+    }
     
     
 //Getters
@@ -154,28 +192,5 @@ public abstract class Pieza {
     }
     
     
-    public Pieza(String id, String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
-    		String FechaEntradaGaleria,String FechaSalidaGaleria,String EstadoActual,
-    		boolean ValorFijo,int ValorInicial,int ValorMinimo,int Valor,
-    		Comprador DueñoActual, int peso,String observacion,Autor autor) {
-    	
-    	this.id= id;
-    	this.titulo= titulo;
-    	this.año= año;
-    	this.lugarDeCreacion= lugarDeCreacion;
-    	this.enExhibicion= enExhibicion;
-    	this.fechaEntradaGaleria= fechaEntradaGaleria;
-    	this.fechaSalidaGaleria= fechaSalidaGaleria;
-    	this.estadoActual= estadoActual;
-    	this.valorFijo= valorFijo;
-    	this.valorInicial= valorInicial;
-    	this.valorMinimo= valorMinimo;
-    	this.valor= valor;
-    	this.DueñoActual= DueñoActual;
-    	this.peso=peso;
-    	this.observacion=observacion;
-    	this.autor=autor;
-
-    }
     
 }

@@ -5,7 +5,9 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 import Logica.Administrador;
+import Logica.Autor;
 import Logica.Comprador;
+import Logica.Pieza;
 
 
 public class Padministrador {
@@ -30,10 +32,11 @@ public class Padministrador {
 				System.out.println("1. Registrar Nuevo Comprador");
 				System.out.println("2. Consultar Compradores");
 				System.out.println("3. Registrar Nueva Pieza");
-				System.out.println("4. Vender Obra");
-				System.out.println("5. Confirmar Venta Obra");
-				System.out.println("5. Verificar Comprador para Subasta");
-				System.out.println("6. Iniciar Subasta");
+				System.out.println("4. Consultar Piezas");
+				System.out.println("5. Vender Obra");
+				System.out.println("6. Confirmar Venta Obra");
+				System.out.println("7. Verificar Comprador para Subasta");
+				System.out.println("8. Iniciar Subasta");
 				op = sc.nextInt();
 				try {
 					if(op == 1) {
@@ -54,18 +57,44 @@ public class Padministrador {
 				        }
 				        
 					}else if(op == 3) {
-						int pieza = 0;
+						int intpieza = 0;
+						String pieza = "";
 						do {
 							System.out.println("Que tipo de Pieza desea registrar");
 							System.out.println("1. Escultura");
 							System.out.println("2. Pintura");
 							System.out.println("3. Video");
 							System.out.println("4. Fotografia");
-							pieza = sc.nextInt();
+							System.out.println("5. Regresar al Menu Principal");
+							intpieza = sc.nextInt();
 							
-							if
+							if (intpieza == 1) {
+								Autor nuevoAutor = administrador.crearRetornarAutor("William");
+								administrador.crearEscultura("hola", 2023, "Colombia", false, "EnVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , "MAÑANA", 5, 10.4, 10.5, false, "Piedra");
+								System.out.println("Pieza Creada!");
+								break;
+							}
+
 							
-						}while(op != 0);
+							else if (intpieza == 2) {
+								
+							}
+							
+							else if (intpieza == 3) {
+								
+							}
+							
+							else if (intpieza == 4) {
+								
+							}
+							
+							else if (intpieza == 5) {	
+								break;
+							}
+							
+							
+							
+						}while(intpieza != 0);
 				
 
 						
@@ -73,6 +102,12 @@ public class Padministrador {
 						
 	
 					}else if(op == 4) {
+						
+						HashMap<String, Pieza> map = administrador.getInventarioHistorico();
+						
+				        for (Entry<String, Pieza> entry : map.entrySet()) {
+				            System.out.println(entry.getKey() + " : " + entry.getValue().getTitulo());
+				        }
 	
 					}else if(op == 5) {
 	

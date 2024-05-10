@@ -7,18 +7,20 @@ public class Escultura extends Pieza {
 	private Boolean electricidad;
 	private String material;
 	
-	public Escultura(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
-			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
-			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
-			Autor autor, double largo, double ancho, double alto, boolean electricidad, String material) {
-		super(id, titulo, año, lugarDeCreacion, enExhibicion, FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual, ValorFijo,
-				ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor);
+	public Escultura(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
+    		String EstadoActual,
+    		boolean ValorFijo,int ValorInicial,int ValorMinimo,int Valor,
+    		Comprador DueñoActual, int peso,String observacion,Autor autor, String FechaSalidaGaleria, double Alto,
+    		double Ancho, double Largo, boolean Electricidad, String Material) {
 		
-		this.alto = alto;
-		this.ancho = ancho;
-		this.largo = largo;
-		this.material = material;
-		this.electricidad = electricidad;
+		super(titulo, año, lugarDeCreacion, enExhibicion , EstadoActual, ValorFijo,
+				ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor,FechaSalidaGaleria);
+		
+		this.alto = Alto;
+		this.ancho = Ancho;
+		this.largo = Largo;
+		this.material = Material;
+		this.electricidad = Electricidad;
 		
 	}
 
