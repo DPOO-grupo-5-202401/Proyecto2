@@ -111,29 +111,29 @@ public class Administrador extends Usuario {
 	}
 	
 	// Crear Video
-	public void crearVideo(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
-			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+	public void crearVideo(String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
 			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
-			Logica.Autor autor, int resolucion, int duracion) {
+			Autor autor, int resolucion, int duracion) {
 		
-		Video nuevoVideo = new Video(id,titulo,año,lugarDeCreacion,enExhibicion,FechaEntradaGaleria,FechaSalidaGaleria,EstadoActual,ValorFijo,
+		Video nuevoVideo = new Video(titulo,año,lugarDeCreacion,enExhibicion,FechaSalidaGaleria,EstadoActual,ValorFijo,
 				ValorInicial,ValorMinimo,Valor,DueñoActual,peso,observacion,autor,resolucion,duracion);
-		this.inventarioHistorico.put(nuevoVideo.getId(),nuevoVideo);
+		this.inventarioHistorico.put(nuevoVideo.getTitulo(),nuevoVideo);
 	}
 	
 	
 	//Crear Pintura
-	public void crearPintura(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
-			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+	public void crearPintura(String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
 			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
 			Autor autor, String tecnica, String estilo, int altura, int ancho) {
 		
-		Pintura nuevaPintura = new Pintura(id,titulo,año,lugarDeCreacion,enExhibicion,
-				FechaEntradaGaleria,FechaSalidaGaleria,EstadoActual,ValorFijo,
+		Pintura nuevaPintura = new Pintura(titulo,año,lugarDeCreacion,enExhibicion,
+				FechaSalidaGaleria,EstadoActual,ValorFijo,
 				ValorInicial, ValorMinimo,Valor,DueñoActual,peso, observacion,
 				autor, tecnica,estilo,altura,ancho);
 		
-		this.inventarioHistorico.put(nuevaPintura.getId(),nuevaPintura);
+		this.inventarioHistorico.put(nuevaPintura.getTitulo(),nuevaPintura);
 	}
 	
 	//Crear Escultura
@@ -149,21 +149,21 @@ public class Administrador extends Usuario {
 	    		DueñoActual,peso,observacion,autor,fechaSalidaGaleria,alto,
 	    		ancho, largo, electricidad, material);
 		
-		this.inventarioHistorico.put(nuevaEscultura.getId(),nuevaEscultura);
+		this.inventarioHistorico.put(nuevaEscultura.getTitulo(),nuevaEscultura);
 	}
 	
 	
 	//Crear Fotografia
-	public void crearFotografia(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
-			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+	public void crearFotografia(String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
 			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
 			Autor autor, int resolucion, String tipo) {
 		
-		Fotografia nuevaFotografia = new Fotografia(id, titulo, año, lugarDeCreacion, enExhibicion,
-				FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual, ValorFijo,
+		Fotografia nuevaFotografia = new Fotografia(titulo, año, lugarDeCreacion, enExhibicion,
+				FechaSalidaGaleria, EstadoActual, ValorFijo,
 				ValorInicial, ValorMinimo, Valor, DueñoActual,peso,observacion,
 				autor, resolucion,tipo);
-		this.inventarioHistorico.put(nuevaFotografia.getId(),nuevaFotografia);
+		this.inventarioHistorico.put(nuevaFotografia.getTitulo(),nuevaFotografia);
 	}
 	
 	
@@ -175,6 +175,21 @@ public class Administrador extends Usuario {
 			this.crearComprador(datos[0], Integer.parseInt(datos[1]), datos[2], datos[3]);
 		}
 	}
+	
+	
+	public void cargarVideos() {
+		ArrayList<String> textos = ArchivoTextoPlano.cargar("videos.csv");
+		for(String texto : textos) {
+			String []datos = texto.split(";");
+			Autor nuevoAutor = this.crearRetornarAutor(datos[13]);
+			
+			this.crearVideo(datos[0], Integer.parseInt(datos[1]), datos[2], Boolean.parseBoolean(datos[3]),
+					datos[4], datos[5], Boolean.parseBoolean(datos[6]),
+					Integer.parseInt(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]), this.compradores.get(datos[10]), Integer.parseInt(datos[11]), datos[12],
+					this.autores.get(nuevoAutor.getId()), Integer.parseInt(datos[14]), Integer.parseInt(datos[15]));
+		}
+	}
+	
 
 	
 	

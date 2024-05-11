@@ -28,12 +28,9 @@ public abstract class Pieza {
     		String EstadoActual,
     		boolean ValorFijo,int ValorInicial,int ValorMinimo,int Valor,
     		Comprador DueñoActual, int peso,String observacion,Autor autor, String FechaSalidaGaleria) {
+
     	
-    	Random random = new Random();
-    	int randomNumber = random.nextInt(100) + 10;
-    	this.id= "PI" + randomNumber;
-    	
-    	
+    	this.id = "";
     	this.titulo= titulo;
     	this.año= año;
     	this.lugarDeCreacion= lugarDeCreacion;

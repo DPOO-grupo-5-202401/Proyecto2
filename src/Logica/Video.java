@@ -1,16 +1,20 @@
 package Logica;
 
+import java.util.Random;
+
 public class Video extends Pieza {
 	private int resolucion;
 	private int duracion;
 	
 	
-	public Video(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
-			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+	public Video(String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
 			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
 			Autor autor, int resolucion, int duracion) {
-		super(id, año, lugarDeCreacion, enExhibicion, FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual,
-				ValorFijo, ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor);
+		
+		super(titulo, año, lugarDeCreacion, enExhibicion , EstadoActual, ValorFijo,
+				ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor,FechaSalidaGaleria);
+    	this.id = "VIDEO";
 		this.resolucion = resolucion;
 		this.duracion = duracion;
 	}

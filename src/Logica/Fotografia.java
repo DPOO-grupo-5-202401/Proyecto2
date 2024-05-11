@@ -18,12 +18,15 @@ public class Fotografia extends Pieza{
 	public void setTipo(String tipo) {
     	this.tipo= tipo;
     }
-	public Fotografia(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
-			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+	public Fotografia(String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
 			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
 			Autor autor, int resolucion, String tipo) {
-		super(id, titulo, año, lugarDeCreacion, enExhibicion, FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual,
-				ValorFijo, ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor);
+		
+		super(titulo, año, lugarDeCreacion, enExhibicion , EstadoActual, ValorFijo,
+				ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor,FechaSalidaGaleria);
+		
+    	this.id = "FOTOGRAFIA";
 		this.resolucion = resolucion;
 		this.tipo = tipo;
 	}

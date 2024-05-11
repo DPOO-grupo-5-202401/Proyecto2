@@ -16,6 +16,7 @@ public class Escultura extends Pieza {
 		super(titulo, año, lugarDeCreacion, enExhibicion , EstadoActual, ValorFijo,
 				ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor,FechaSalidaGaleria);
 		
+    	this.id = "ESCULTURA";
 		this.alto = Alto;
 		this.ancho = Ancho;
 		this.largo = Largo;

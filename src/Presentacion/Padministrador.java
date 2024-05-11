@@ -106,11 +106,12 @@ public class Padministrador {
 						HashMap<String, Pieza> map = administrador.getInventarioHistorico();
 						
 				        for (Entry<String, Pieza> entry : map.entrySet()) {
-				            System.out.println(entry.getKey() + " : " + entry.getValue().getTitulo());
+				            System.out.println(entry.getValue().getId() + ":" + entry.getKey() + " por " + entry.getValue().getAutor().getNombre());
 				        }
 	
 					}else if(op == 5) {
 						administrador.cargarCompradores();
+						administrador.cargarVideos();
 	
 					}else if(op == 6) {
 						

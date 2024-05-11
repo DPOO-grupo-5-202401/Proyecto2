@@ -34,13 +34,15 @@ public class Pintura extends Pieza{
 	public void setAltura(int altura) {
     	this.altura= altura;
     }
-	public Pintura(String id, String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
-			String FechaEntradaGaleria, String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
+	public Pintura(String titulo, int año, String lugarDeCreacion, boolean enExhibicion,
+			String FechaSalidaGaleria, String EstadoActual, boolean ValorFijo,
 			int ValorInicial, int ValorMinimo, int Valor, Comprador DueñoActual, int peso, String observacion,
 			Autor autor, String tecnica, String estilo, int altura, int ancho) {
 		
-		super(titulo, año, lugarDeCreacion, enExhibicion, FechaEntradaGaleria, FechaSalidaGaleria, EstadoActual,
-				ValorFijo, ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor);
+		super(titulo, año, lugarDeCreacion, enExhibicion , EstadoActual, ValorFijo,
+				ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor,FechaSalidaGaleria);
+		
+    	this.id = "PINTURA";
 		this.tecnica = tecnica;
 		this.estilo = estilo;
 		this.altura = altura;
