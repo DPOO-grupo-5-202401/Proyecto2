@@ -122,6 +122,11 @@ public class Padministrador {
 					}else if(op == 5) {
 						administrador.cargarCompradores();
 						administrador.cargarVideos();
+						administrador.cargarEsculturas();
+						administrador.cargarPinturas();
+						administrador.cargarFotografia();
+						
+						
 	
 					}else if(op == 6) {
 						

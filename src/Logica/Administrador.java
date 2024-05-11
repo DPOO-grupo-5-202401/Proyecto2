@@ -172,6 +172,7 @@ public class Administrador extends Usuario {
 		ArrayList<String> textos = ArchivoTextoPlano.cargar("compradores.csv");
 		for(String texto : textos) {
 			String []datos = texto.split(";");
+			System.out.println(datos[2]);
 			this.crearComprador(datos[0], Integer.parseInt(datos[1]), datos[2], datos[3]);
 		}
 	}
@@ -190,11 +191,51 @@ public class Administrador extends Usuario {
 		}
 	}
 	
+	public void cargarEsculturas() {
+		ArrayList<String> textos = ArchivoTextoPlano.cargar("esculturas.csv");
+		for(String texto : textos) {
+			String []datos = texto.split(";");
+			Autor nuevoAutor = this.crearRetornarAutor(datos[13]);
+			
+			this.crearEscultura(datos[0],Integer.parseInt(datos[1]),datos[2],Boolean.parseBoolean(datos[3]), 
+		    		datos[4],datos[5],
+		    		Boolean.parseBoolean(datos[6]),Integer.parseInt(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]),
+		    		this.compradores.get(datos[10]), Integer.parseInt(datos[11]) , datos[12],this.autores.get(nuevoAutor.getId()),  Integer.parseInt(datos[14]), Integer.parseInt(datos[15]),
+		    		Integer.parseInt(datos[16]), Boolean.parseBoolean(datos[17]), datos[18]);
+		}
+	}
 
 	
+
+	public void cargarPinturas() {
+		ArrayList<String> textos = ArchivoTextoPlano.cargar("pinturas.csv");
+		for(String texto : textos) {
+			String []datos = texto.split(";");
+			Autor nuevoAutor = this.crearRetornarAutor(datos[13]);
+			
+			this.crearPintura(datos[0],Integer.parseInt(datos[1]),datos[2],Boolean.parseBoolean(datos[3]), 
+		    		datos[4],datos[5],
+		    		Boolean.parseBoolean(datos[6]),Integer.parseInt(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]),
+		    		this.compradores.get(datos[10]), Integer.parseInt(datos[11]) , datos[12],this.autores.get(nuevoAutor.getId()), datos[14],datos[15],
+		    		Integer.parseInt(datos[16]), Integer.parseInt(datos[17]));
+		}
+	}
 	
-	
-	
+
+	public void cargarFotografia() {
+		ArrayList<String> textos = ArchivoTextoPlano.cargar("fotografia.csv");
+		for(String texto : textos) {
+			String []datos = texto.split(";");
+			Autor nuevoAutor = this.crearRetornarAutor(datos[13]);
+			
+			this.crearFotografia(datos[0],Integer.parseInt(datos[1]),datos[2],Boolean.parseBoolean(datos[3]), 
+		    		datos[4],datos[5],
+		    		Boolean.parseBoolean(datos[6]),Integer.parseInt(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]),
+		    		this.compradores.get(datos[10]), Integer.parseInt(datos[11]) , datos[12],this.autores.get(nuevoAutor.getId()),
+		    		Integer.parseInt(datos[14]), datos[15]);
+		}
+	}
+
 	
 	
 	
