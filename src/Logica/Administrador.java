@@ -1,6 +1,8 @@
 package Logica;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import Persistencia.ArchivoTextoPlano;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -163,6 +165,17 @@ public class Administrador extends Usuario {
 				autor, resolucion,tipo);
 		this.inventarioHistorico.put(nuevaFotografia.getId(),nuevaFotografia);
 	}
+	
+	
+	//Persistencia - Cargar Texto Plano
+	public void cargarCompradores() {
+		ArrayList<String> textos = ArchivoTextoPlano.cargar("compradores.csv");
+		for(String texto : textos) {
+			String []datos = texto.split(";");
+			this.crearComprador(datos[0], Integer.parseInt(datos[1]), datos[2], datos[3]);
+		}
+	}
+
 	
 	
 	

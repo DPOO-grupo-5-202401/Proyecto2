@@ -33,10 +33,11 @@ public class Padministrador {
 				System.out.println("2. Consultar Compradores");
 				System.out.println("3. Registrar Nueva Pieza");
 				System.out.println("4. Consultar Piezas");
-				System.out.println("5. Vender Obra");
-				System.out.println("6. Confirmar Venta Obra");
-				System.out.println("7. Verificar Comprador para Subasta");
-				System.out.println("8. Iniciar Subasta");
+				System.out.println("5. Cargar Datos");
+				System.out.println("6. Vender Obra");
+				System.out.println("7. Confirmar Venta Obra");
+				System.out.println("8. Verificar Comprador para Subasta");
+				System.out.println("9. Iniciar Subasta");
 				op = sc.nextInt();
 				try {
 					if(op == 1) {
@@ -58,7 +59,6 @@ public class Padministrador {
 				        
 					}else if(op == 3) {
 						int intpieza = 0;
-						String pieza = "";
 						do {
 							System.out.println("Que tipo de Pieza desea registrar");
 							System.out.println("1. Escultura");
@@ -110,6 +110,7 @@ public class Padministrador {
 				        }
 	
 					}else if(op == 5) {
+						administrador.cargarCompradores();
 	
 					}else if(op == 6) {
 						
