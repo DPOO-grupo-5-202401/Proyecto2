@@ -70,21 +70,35 @@ public class Padministrador {
 							
 							if (intpieza == 1) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearEscultura("hola", 2023, "Colombia", false, "EnVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , "MAÑANA", 5, 10.4, 10.5, false, "Piedra");
-								System.out.println("Pieza Creada!");
+								administrador.crearEscultura("hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 5, 10.4, 10.5, false, "Piedra");
+								System.out.println("Escultura Creada!");
 								break;
 							}
 
 							
 							else if (intpieza == 2) {
+								Autor nuevoAutor = administrador.crearRetornarAutor("William");
+								administrador.crearPintura("Hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , "Al Oleo", "Vanguardismo", 50,60);
+								System.out.println("Pintura Creada!");
+
+								break;
 								
 							}
 							
 							else if (intpieza == 3) {
+								Autor nuevoAutor = administrador.crearRetornarAutor("William");
+								administrador.crearVideo("holaVideo", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) ,1920,60);
+								System.out.println("Video Creado!");
+								break;
 								
 							}
 							
 							else if (intpieza == 4) {
+								Autor nuevoAutor = administrador.crearRetornarAutor("William");
+								administrador.crearFotografia("holaFoto", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 1920, "Analoga");
+								System.out.println("Pieza Creada!");
+								break;
+								
 								
 							}
 							
@@ -95,10 +109,6 @@ public class Padministrador {
 							
 							
 						}while(intpieza != 0);
-				
-
-						
-						
 						
 	
 					}else if(op == 4) {

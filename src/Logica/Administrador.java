@@ -138,15 +138,15 @@ public class Administrador extends Usuario {
 	
 	//Crear Escultura
 	public void crearEscultura(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
-    		String EstadoActual,
+    		String EstadoActual,String fechaSalidaGaleria,
     		boolean ValorFijo,int ValorInicial,int ValorMinimo,int Valor,
-    		Comprador DueñoActual, int peso,String observacion,Autor autor, String fechaSalidaGaleria, double alto,
+    		Comprador DueñoActual, int peso,String observacion,Autor autor,  double alto,
     		double ancho, double largo, boolean electricidad, String material) {
 		
 		Escultura nuevaEscultura = new Escultura(titulo,año,lugarDeCreacion,enExhibicion, 
-	    		EstadoActual,
+	    		EstadoActual,fechaSalidaGaleria,
 	    		ValorFijo,ValorInicial,ValorMinimo,Valor,
-	    		DueñoActual,peso,observacion,autor,fechaSalidaGaleria,alto,
+	    		DueñoActual,peso,observacion,autor,alto,
 	    		ancho, largo, electricidad, material);
 		
 		this.inventarioHistorico.put(nuevaEscultura.getTitulo(),nuevaEscultura);

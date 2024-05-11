@@ -7,10 +7,10 @@ public class Escultura extends Pieza {
 	private Boolean electricidad;
 	private String material;
 	
-	public Escultura(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
+	public Escultura(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, String FechaSalidaGaleria,
     		String EstadoActual,
     		boolean ValorFijo,int ValorInicial,int ValorMinimo,int Valor,
-    		Comprador DueñoActual, int peso,String observacion,Autor autor, String FechaSalidaGaleria, double Alto,
+    		Comprador DueñoActual, int peso,String observacion,Autor autor,  double Alto,
     		double Ancho, double Largo, boolean Electricidad, String Material) {
 		
 		super(titulo, año, lugarDeCreacion, enExhibicion , EstadoActual, ValorFijo,
