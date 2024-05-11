@@ -7,6 +7,7 @@ import Persistencia.ArchivoTextoPlano;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Random;
+import java.util.Map.Entry;
 
 
 public class Administrador extends Usuario {
@@ -16,10 +17,28 @@ public class Administrador extends Usuario {
 	private String login;
     private HashMap<String, Comprador> compradoresVerificados;
 	public HashMap<String, Pieza> inventarioHistorico;
+	public HashMap<String, Video> videos;
+	public HashMap<String, Escultura> esculturas;
+	public HashMap<String, Pintura> pinturas;
+	public HashMap<String, Fotografia> fotografias;
 	public HashMap<String, Comprador> compradores;
 	public HashMap<String, Autor> autores;
 	
-	
+    // Constructor
+    public Administrador(String nombre, String contrasena, String login) {
+        super(nombre);
+        this.contrasena = contrasena;
+        this.login = login;
+        this.compradoresVerificados = new HashMap<>();
+        this.compradores = new HashMap<>();
+        this.inventarioHistorico = new HashMap<>();
+        this.autores = new HashMap<>();
+        this.videos = new HashMap<>();
+        this.esculturas = new HashMap<>();
+        this.fotografias = new HashMap<>();
+        this.pinturas = new HashMap<>();
+        
+        }
 
 
 	//Metodos
@@ -75,16 +94,7 @@ public class Administrador extends Usuario {
 
     
 	
-    // Constructor
-    public Administrador(String nombre, String contrasena, String login) {
-        super(nombre);
-        this.contrasena = contrasena;
-        this.login = login;
-        this.compradoresVerificados = new HashMap<>();
-        this.compradores = new HashMap<>();
-        this.inventarioHistorico = new HashMap<>();
-        this.autores = new HashMap<>();
-        }
+
 
     // Verificar un comprador
     public void verificarComprador(Comprador comprador) {
@@ -119,6 +129,7 @@ public class Administrador extends Usuario {
 		Video nuevoVideo = new Video(titulo,año,lugarDeCreacion,enExhibicion,FechaSalidaGaleria,EstadoActual,ValorFijo,
 				ValorInicial,ValorMinimo,Valor,DueñoActual,peso,observacion,autor,resolucion,duracion);
 		this.inventarioHistorico.put(nuevoVideo.getTitulo(),nuevoVideo);
+		this.videos.put(nuevoVideo.getTitulo(),nuevoVideo);
 	}
 	
 	
@@ -134,6 +145,7 @@ public class Administrador extends Usuario {
 				autor, tecnica,estilo,altura,ancho);
 		
 		this.inventarioHistorico.put(nuevaPintura.getTitulo(),nuevaPintura);
+		this.pinturas.put(nuevaPintura.getTitulo(),nuevaPintura);
 	}
 	
 	//Crear Escultura
@@ -150,6 +162,7 @@ public class Administrador extends Usuario {
 	    		ancho, largo, electricidad, material);
 		
 		this.inventarioHistorico.put(nuevaEscultura.getTitulo(),nuevaEscultura);
+		this.esculturas.put(nuevaEscultura.getTitulo(),nuevaEscultura);
 	}
 	
 	
@@ -164,6 +177,7 @@ public class Administrador extends Usuario {
 				ValorInicial, ValorMinimo, Valor, DueñoActual,peso,observacion,
 				autor, resolucion,tipo);
 		this.inventarioHistorico.put(nuevaFotografia.getTitulo(),nuevaFotografia);
+		this.fotografias.put(nuevaFotografia.getTitulo(),nuevaFotografia);
 	}
 	
 	
@@ -235,7 +249,44 @@ public class Administrador extends Usuario {
 		    		Integer.parseInt(datos[14]), datos[15]);
 		}
 	}
-
+	
+	//Persistencia - Almacenar Compradores
+	
+	//Almacenar Compradores
+	public void almacenarCompradores() {
+		ArrayList<String> textos = new ArrayList<String>();		
+        for (Entry<String, Comprador> entry : compradores.entrySet()) {
+        	textos.add(entry.getValue().getNombre() + ";" + entry.getValue().getNumeroDeContacto() + ";" + entry.getValue().getContrasena() + ";" + entry.getKey() + "\n");
+        }
+		ArchivoTextoPlano.almacenar("compradores.csv", textos);
+	}
+	
+	
+	//Almacenar Video
+	public void almacenarVideos() {
+		ArrayList<String> textos = new ArrayList<String>();		
+        for (Entry<String, Video> entry : videos.entrySet()) {
+        		
+        		textos.add(entry.getValue().getTitulo() + ";" +
+        	            entry.getValue().getAnio() + ";" +
+        	            entry.getValue().getLugarDeCreacion() + ";" +
+        	            entry.getValue().getEnExhibicion() + ";" +
+        	            entry.getValue().getFechaSalidaGaleria() + ";" +
+        	            entry.getValue().getEstadoActual() + ";" +
+        	            entry.getValue().getValorFijo() + ";" +
+        	            entry.getValue().getValorInicial() + ";" +
+        	            entry.getValue().getValorMinimo() + ";" +
+        	            entry.getValue().getValor() + ";" +
+        	            entry.getValue().getDueñoActual().getNombre() + ";" +
+        	            entry.getValue().getPeso() + ";" +
+        	            entry.getValue().getObservacion() + ";" +
+        	            entry.getValue().getAutor().getNombre() + ";" +
+        	            entry.getValue().getResolucion() + ";" +
+        	            entry.getValue().getDuracion() + "\n");
+        }
+		ArchivoTextoPlano.almacenar("videos.csv", textos);
+	}
+	
 	
 	
 	

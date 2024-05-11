@@ -24,6 +24,12 @@ public class Padministrador {
 			Scanner sc = new Scanner(System.in);
 			do {
 				
+				administrador.cargarCompradores();
+				administrador.cargarVideos();
+				administrador.cargarEsculturas();
+				administrador.cargarPinturas();
+				administrador.cargarFotografia();
+				
 				System.out.println("\n");
 		        System.out.println("*****Bienvenido Administrador*****");
 				System.out.println("\n");
@@ -34,10 +40,11 @@ public class Padministrador {
 				System.out.println("3. Registrar Nueva Pieza");
 				System.out.println("4. Consultar Piezas");
 				System.out.println("5. Cargar Datos");
-				System.out.println("6. Vender Obra");
-				System.out.println("7. Confirmar Venta Obra");
-				System.out.println("8. Verificar Comprador para Subasta");
-				System.out.println("9. Iniciar Subasta");
+				System.out.println("6. Guardar Datos");
+				System.out.println("7. Vender Obra");
+				System.out.println("8. Confirmar Venta Obra");
+				System.out.println("9. Verificar Comprador para Subasta");
+				System.out.println("10. Iniciar Subasta");
 				op = sc.nextInt();
 				try {
 					if(op == 1) {
@@ -70,7 +77,7 @@ public class Padministrador {
 							
 							if (intpieza == 1) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearEscultura("hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 5, 10.4, 10.5, false, "Piedra");
+								administrador.crearEscultura("hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 5, 10.4, 10.5, false, "Piedra");
 								System.out.println("Escultura Creada!");
 								break;
 							}
@@ -78,7 +85,7 @@ public class Padministrador {
 							
 							else if (intpieza == 2) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearPintura("Hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , "Al Oleo", "Vanguardismo", 50,60);
+								administrador.crearPintura("Hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , "Al Oleo", "Vanguardismo", 50,60);
 								System.out.println("Pintura Creada!");
 
 								break;
@@ -87,7 +94,7 @@ public class Padministrador {
 							
 							else if (intpieza == 3) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearVideo("holaVideo", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) ,1920,60);
+								administrador.crearVideo("holaVideo", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) ,1920,60);
 								System.out.println("Video Creado!");
 								break;
 								
@@ -95,7 +102,7 @@ public class Padministrador {
 							
 							else if (intpieza == 4) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearFotografia("holaFoto", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("WILLIAM"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 1920, "Analoga");
+								administrador.crearFotografia("holaFoto", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 1920, "Analoga");
 								System.out.println("Pieza Creada!");
 								break;
 								
@@ -125,11 +132,12 @@ public class Padministrador {
 						administrador.cargarEsculturas();
 						administrador.cargarPinturas();
 						administrador.cargarFotografia();
-						
-						
+									
 	
 					}else if(op == 6) {
 						
+						administrador.almacenarCompradores();
+						administrador.almacenarVideos();
 					}
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
