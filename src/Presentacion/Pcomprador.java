@@ -41,16 +41,6 @@ public class Pcomprador {
             "V1", new Video("V1", "The Clock", 2010, "Christian Marclay", 300000, 1440)
         );
     
-    //static {
-        //autores[0].getPiezasQueHaHecho().put("P1", new Pieza("P1", "Guernica", 1937, "Pablo Picasso", 2000000));
-        //autores[0].getPiezasQueHaHecho().put("P2", new Pieza("P2", "Les Demoiselles d'Avignon", 1907, "Pablo Picasso", 1000000));
-
-        //autores[1].getPiezasQueHaHecho().put("P3", new Pieza("P3", "La Casa Azul", 1929, "Frida Kahlo", 1500000));
-        //autores[1].getPiezasQueHaHecho().put("P4", new Pieza("P4", "Las Dos Fridas", 1939, "Frida Kahlo", 1800000));
-
-        //autores[2].getPiezasQueHaHecho().put("P5", new Pieza("P5", "La Noche Estrellada", 1889, "Vincent van Gogh", 2500000));
-        //autores[2].getPiezasQueHaHecho().put("P6", new Pieza("P6", "Los Girasoles", 1888, "Vincent van Gogh", 2200000));
-    //}
 
     //Buscar un comprador por su login
     private static Comprador buscarComprador(String login, String contrasena) {
@@ -209,7 +199,7 @@ public class Pcomprador {
                 String fecha = "2024-05-10"; 
                 int valor = (int) pieza.getValor();
                 int impuestos = (int) (valor * 0.15); 
-                Compra compra = new Compra(idCompra, fecha, valor, impuestos, "Pendiente", true, null, null);
+                Compra compra = new Compra(null);
 
                 // Registrar la compra
                 comprador.registrarCompra(compra);
@@ -252,7 +242,7 @@ public class Pcomprador {
                     System.out.println("Opción no válida, intente nuevamente.");
                     break;
             }
-        } while (opcion != 4);
+        } while (opcion != 5);
     }
 
     public static void main(String[] args) {
