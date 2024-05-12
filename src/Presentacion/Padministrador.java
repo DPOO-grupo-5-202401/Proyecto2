@@ -162,11 +162,11 @@ public class Padministrador {
 						HashMap<String, Oferta> map = administrador.getOfertas();
 						
 				        for (Entry<String, Oferta> entry : map.entrySet()) {
-				            System.out.println(entry.getValue().getId() + ": " + entry.getValue().getPieza().getTitulo() + ". Comprada Por: " + entry.getValue().getComprador().getNombre() + " - " + entry.getValue().isValidada());
+				            System.out.println(entry.getKey() + ": " + entry.getValue().getPieza().getTitulo() + ". Comprada Por: " + entry.getValue().getComprador().getNombre() + " - " + entry.getValue().isValidada());
 				        }
 						
 					}else if(op == 9) {
-						Compra nuevaCompra = administrador.crearRetornarCompra(administrador.ofertas.get("OF001"));
+						Compra nuevaCompra = administrador.crearRetornarCompra(administrador.ofertas.get("101"));
 						
 						
 						

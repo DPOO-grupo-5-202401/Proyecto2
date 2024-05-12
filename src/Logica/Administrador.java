@@ -272,7 +272,7 @@ public class Administrador extends Usuario {
 			Comprador comprador = this.compradores.get(datos[1]);
 			Pieza pieza = this.inventarioHistorico.get(datos[2]);
 			
-			this.crearOfertaTP(datos[0],comprador,pieza,Boolean.parseBoolean(datos[3]));
+			this.crearOfertaTP(cleanString,comprador,pieza,Boolean.parseBoolean(datos[3]));
 		}
 	}
 	
