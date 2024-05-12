@@ -23,6 +23,9 @@ public class Administrador extends Usuario {
 	public HashMap<String, Fotografia> fotografias;
 	public HashMap<String, Comprador> compradores;
 	public HashMap<String, Autor> autores;
+	public HashMap<String, Oferta> ofertas;
+	public HashMap<String, Compra> compras;
+	
 	
     // Constructor
     public Administrador(String nombre, String contrasena, String login) {
@@ -37,6 +40,8 @@ public class Administrador extends Usuario {
         this.esculturas = new HashMap<>();
         this.fotografias = new HashMap<>();
         this.pinturas = new HashMap<>();
+        this.ofertas = new HashMap<>();
+        this.compras = new HashMap<>();
         
         }
 
@@ -186,7 +191,6 @@ public class Administrador extends Usuario {
 		ArrayList<String> textos = ArchivoTextoPlano.cargar("compradores.csv");
 		for(String texto : textos) {
 			String []datos = texto.split(";");
-			System.out.println(datos[2]);
 			this.crearComprador(datos[0], Integer.parseInt(datos[1]), datos[2], datos[3]);
 		}
 	}
@@ -363,19 +367,34 @@ public class Administrador extends Usuario {
 	}
 	
     
-    public void registrarPago(Compra compra) {
-        
+    public Oferta crearRetornarOferta(Comprador comprador, Pieza pieza){
+        if (pieza.getValorFijo()==false || pieza.getEstadoActual() == "Bloqueada") {
+        	return null;
+        }
+        else {
+        	pieza.setEstadoActual("Bloqueada");
+        	System.out.println("Pieza Bloqueda");
+        	Oferta nuevaOferta = new Oferta(comprador,pieza);
+        	this.ofertas.put(nuevaOferta.getId(),nuevaOferta);
+        	return nuevaOferta;
+        }
     }
 
+    
     // Devolver una pieza al propietario
     public void devolverPieza(Pieza pieza) {
         
     }
     
-
-    public void agregarPiezaAlInventario(Pieza pieza) {
-
+    public Compra crearRetornarCompra(Oferta oferta) {
+    	Comprador nuevoDueño = oferta.getComprador();
+    	oferta.getPieza().setDueñoActual(nuevoDueño);
+    	oferta.setValidada(true);
+    	Compra nuevaCompra = new Compra(oferta);
+    	this.compras.put(nuevaCompra.getId(),nuevaCompra);
+    	return nuevaCompra;
     }
+    
 
     // Iniciar una subasta
 	
@@ -396,6 +415,66 @@ public class Administrador extends Usuario {
 		LocalTime horaActual = LocalTime.now();
 		String hora = horaActual.toString();
 		Movimiento nuevoMovimiento = new Movimiento(id,hora,valor,tipoMovimiento,comprador);
+	}
+
+
+	public HashMap<String, Video> getVideos() {
+		return videos;
+	}
+
+
+	public void setVideos(HashMap<String, Video> videos) {
+		this.videos = videos;
+	}
+
+
+	public HashMap<String, Escultura> getEsculturas() {
+		return esculturas;
+	}
+
+
+	public void setEsculturas(HashMap<String, Escultura> esculturas) {
+		this.esculturas = esculturas;
+	}
+
+
+	public HashMap<String, Pintura> getPinturas() {
+		return pinturas;
+	}
+
+
+	public void setPinturas(HashMap<String, Pintura> pinturas) {
+		this.pinturas = pinturas;
+	}
+
+
+	public HashMap<String, Fotografia> getFotografias() {
+		return fotografias;
+	}
+
+
+	public void setFotografias(HashMap<String, Fotografia> fotografias) {
+		this.fotografias = fotografias;
+	}
+
+
+	public HashMap<String, Oferta> getOfertas() {
+		return ofertas;
+	}
+
+
+	public void setOfertas(HashMap<String, Oferta> ofertas) {
+		this.ofertas = ofertas;
+	}
+
+
+	public HashMap<String, Compra> getCompras() {
+		return compras;
+	}
+
+
+	public void setCompras(HashMap<String, Compra> compras) {
+		this.compras = compras;
 	}
 	
 

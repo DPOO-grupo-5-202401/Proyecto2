@@ -146,31 +146,31 @@ public abstract class Pieza {
     }
     
     public void setFechaEntradaGaleria(String FechaEntradaGaleria) {
-    	this.fechaEntradaGaleria= fechaEntradaGaleria;
+    	this.fechaEntradaGaleria= FechaEntradaGaleria;
     }
     
     public void getFechaSalidaGaleria(String FechaSalidaGaleria) {
-    	this.fechaSalidaGaleria= fechaSalidaGaleria;
+    	this.fechaSalidaGaleria= FechaSalidaGaleria;
     }
     
     public void setEstadoActual(String EstadoActual) {
-    	this.estadoActual= estadoActual;
+    	this.estadoActual= EstadoActual;
     }
     
-    public void setValorFijo(boolean getValorFijo) {
-    	this.valorFijo= valorFijo;
+    public void setValorFijo(boolean ValorFijo) {
+    	this.valorFijo= ValorFijo;
     }
     
     public void setValorInicial(int ValorInicial) {
-    	this.valorInicial= valorInicial;
+    	this.valorInicial= ValorInicial;
     }
     
     public void setValorMinimo(int ValorMinimo) {
-    	this.valorMinimo= valorMinimo;
+    	this.valorMinimo= ValorMinimo;
     }
     
     public void setValor(int Valor) {
-    	this.valor= valor;
+    	this.valor= Valor;
     }
     
     public void setDueñoActual(Comprador DueñoActual) {

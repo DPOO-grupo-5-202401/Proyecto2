@@ -1,26 +1,33 @@
 package Logica;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Compra {
+	public static int contadorCompras = 0;
     private String id;
     private String fecha;
     private int valor;
-    private int impuestos;
-    private String estado;
-    private boolean validado;
+    private double impuestos;
     private Oferta ofertaValidada;
-    private Empleado empleado;
     
-	public Compra(String id, String fecha, int valor, int impuestos, String estado, boolean validado,
-			Oferta ofertaValidada, Empleado empleado) {
-		super();
-		this.id = id;
-		this.fecha = fecha;
-		this.valor = valor;
-		this.impuestos = impuestos;
-		this.estado = estado;
-		this.validado = validado;
+	public Compra(Oferta ofertaValidada) {
+		String numero = String.format("%03d", contadorCompras);
+		this.id = numero;
+		contadorCompras++;
+		
+    	Date currentDate = new Date();
+    	
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    	String dateString = formatter.format(currentDate);
+    	
+    	this.fecha = dateString;
+    	
+		this.valor = ofertaValidada.getPieza().getValor();
+		this.impuestos = (valor * 0.19);
+		
 		this.ofertaValidada = ofertaValidada;
-		this.empleado = empleado;
+		
 	}
 	public String getId() {
 		return id;

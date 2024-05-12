@@ -1,19 +1,22 @@
 package Logica;
 
 public class Oferta {
+	public static int contadorOfertas = 0;
     private int valorOferta;
     private boolean validada;
     private Comprador comprador;
     private Pieza Pieza;
     private String id;
     
-	public Oferta(int valorOferta, boolean validada, Comprador comprador, Logica.Pieza pieza, String id) {
-		super();
-		this.valorOferta = valorOferta;
-		this.validada = validada;
+	public Oferta(Comprador comprador, Pieza pieza) {
+		String numero = String.format("%03d", contadorOfertas);
+		this.id = numero;
+		contadorOfertas++;
+		
+		this.valorOferta = pieza.getValor();
+		this.validada = false;
 		this.comprador = comprador;
-		Pieza = pieza;
-		this.id = id;
+		this.Pieza = pieza;
 		
 	
 	}

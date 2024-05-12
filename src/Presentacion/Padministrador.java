@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 import Logica.Administrador;
 import Logica.Autor;
+import Logica.Compra;
 import Logica.Comprador;
+import Logica.Oferta;
 import Logica.Pieza;
 
 
@@ -16,6 +18,11 @@ public class Padministrador {
 
 	public Padministrador() {
 		this.administrador = new Administrador("Juan", "A1", "A1");
+		administrador.cargarCompradores();
+		administrador.cargarVideos();
+		administrador.cargarEsculturas();
+		administrador.cargarPinturas();
+		administrador.cargarFotografia();
 		menu();
 	}
 
@@ -24,11 +31,6 @@ public class Padministrador {
 			Scanner sc = new Scanner(System.in);
 			do {
 				
-				administrador.cargarCompradores();
-				administrador.cargarVideos();
-				administrador.cargarEsculturas();
-				administrador.cargarPinturas();
-				administrador.cargarFotografia();
 				
 				System.out.println("\n");
 		        System.out.println("*****Bienvenido Administrador*****");
@@ -41,10 +43,11 @@ public class Padministrador {
 				System.out.println("4. Consultar Piezas");
 				System.out.println("5. Cargar Datos");
 				System.out.println("6. Guardar Datos");
-				System.out.println("7. Vender Obra");
+				System.out.println("7. Crear Oferta");
 				System.out.println("8. Confirmar Venta Obra");
-				System.out.println("9. Verificar Comprador para Subasta");
-				System.out.println("10. Iniciar Subasta");
+				System.out.println("9. Consultar Ventas");
+				System.out.println("10. Verificar Comprador para Subasta");
+				System.out.println("11. Iniciar Subasta");
 				op = sc.nextInt();
 				try {
 					if(op == 1) {
@@ -123,7 +126,7 @@ public class Padministrador {
 						HashMap<String, Pieza> map = administrador.getInventarioHistorico();
 						
 				        for (Entry<String, Pieza> entry : map.entrySet()) {
-				            System.out.println(entry.getValue().getId() + ":" + entry.getKey() + " por " + entry.getValue().getAutor().getNombre());
+				            System.out.println(entry.getValue().getId() + ":" + entry.getKey() + " por " + entry.getValue().getAutor().getNombre() + ". ESTADO: " + entry.getValue().getEstadoActual());
 				        }
 	
 					}else if(op == 5) {
@@ -141,7 +144,28 @@ public class Padministrador {
 						administrador.almacenarEsculturas();
 						administrador.almacenarPinturas();
 						administrador.almacenarFotografias();
+						
+					}else if(op == 7) {
+						Oferta nuevaOferta = administrador.crearRetornarOferta(administrador.compradores.get("Olivi0"), administrador.inventarioHistorico.get("holaVideo"));
+						if (nuevaOferta == null) {
+							System.out.println("La oferta no pudo ser creada, verifica si la pieza si esta disponible para compra");
+						}else {
+							System.out.println("La oferta ha sido creada exitosamente, adquiriras la pieza cuando un administrador verifique tu compra");
+						}
+						
+					}else if(op == 8) {
+						Compra nuevaCompra = administrador.crearRetornarCompra(administrador.ofertas.get("000"));
+						
+					}else if(op == 9) {
+						HashMap<String, Compra> map = administrador.getCompras();
+						
+				        for (Entry<String, Compra> entry : map.entrySet()) {
+				            System.out.println(entry.getValue().getId() + ": " + entry.getValue().getOfertaValidada().getPieza().getTitulo() + ". Comprada Por: " + entry.getValue().getOfertaValidada().getComprador().getNombre());
+				        }
 					}
+					
+					
+					
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				} 
