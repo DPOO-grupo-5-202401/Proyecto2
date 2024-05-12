@@ -46,8 +46,11 @@ public class Padministrador {
 				System.out.println("7. Crear Oferta");
 				System.out.println("8. Confirmar Venta Obra");
 				System.out.println("9. Consultar Ventas");
-				System.out.println("10. Verificar Comprador para Subasta");
-				System.out.println("11. Iniciar Subasta");
+				System.out.println("10.Consultar Historia Pieza");
+				System.out.println("11.Consultar Historia Artista");
+				System.out.println("12.Consultar Historia Comprador");
+				System.out.println("13. Verificar Comprador para Subasta");
+				System.out.println("14. Iniciar Subasta");
 				op = sc.nextInt();
 				try {
 					if(op == 1) {
@@ -156,8 +159,18 @@ public class Padministrador {
 					}else if(op == 8) {
 						Compra nuevaCompra = administrador.crearRetornarCompra(administrador.ofertas.get("000"));
 						
+						
+						
 					}else if(op == 9) {
 						HashMap<String, Compra> map = administrador.getCompras();
+						
+				        for (Entry<String, Compra> entry : map.entrySet()) {
+				            System.out.println(entry.getValue().getId() + ": " + entry.getValue().getOfertaValidada().getPieza().getTitulo() + ". Comprada Por: " + entry.getValue().getOfertaValidada().getComprador().getNombre());
+				        }
+				        
+				        
+					}else if(op == 10) {
+						HashMap<String, Compra> map = administrador.compras.get("000").getOfertaValidada().getPieza().getHistoriaPieza();
 						
 				        for (Entry<String, Compra> entry : map.entrySet()) {
 				            System.out.println(entry.getValue().getId() + ": " + entry.getValue().getOfertaValidada().getPieza().getTitulo() + ". Comprada Por: " + entry.getValue().getOfertaValidada().getComprador().getNombre());

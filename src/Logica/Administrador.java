@@ -392,6 +392,9 @@ public class Administrador extends Usuario {
     	oferta.setValidada(true);
     	Compra nuevaCompra = new Compra(oferta);
     	this.compras.put(nuevaCompra.getId(),nuevaCompra);
+    	
+    	nuevaCompra.getOfertaValidada().getPieza().getHistoriaPieza().put(nuevaCompra.getId(), nuevaCompra);
+    	
     	return nuevaCompra;
     }
     

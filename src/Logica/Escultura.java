@@ -1,5 +1,7 @@
 package Logica;
 
+import java.util.HashMap;
+
 public class Escultura extends Pieza {
 	private int largo;
 	private int ancho;
@@ -22,6 +24,7 @@ public class Escultura extends Pieza {
 		this.largo = Largo;
 		this.material = Material;
 		this.electricidad = Electricidad;
+
 		
 	}
 

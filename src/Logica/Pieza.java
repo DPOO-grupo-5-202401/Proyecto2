@@ -23,6 +23,7 @@ public abstract class Pieza {
     protected Autor autor;
     private int peso;
     private String observacion;
+    private HashMap<String, Compra> historiaPieza;
     
     public Pieza(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
     		String EstadoActual,
@@ -55,6 +56,7 @@ public abstract class Pieza {
     	this.peso=peso;
     	this.observacion=observacion;
     	this.autor=autor;
+		this.historiaPieza = new HashMap<>();
     }
     
     
@@ -88,7 +90,37 @@ public abstract class Pieza {
     	return fechaSalidaGaleria;
     }
 
-    public String getEstadoActual() {
+    public int getAño() {
+		return año;
+	}
+
+
+	public void setAño(int año) {
+		this.año = año;
+	}
+
+
+	public HashMap<String, Compra> getHistoriaPieza() {
+		return historiaPieza;
+	}
+
+
+	public void setHistoriaPieza(HashMap<String, Compra> historiaPieza) {
+		this.historiaPieza = historiaPieza;
+	}
+
+
+	public void setFechaSalidaGaleria(String fechaSalidaGaleria) {
+		this.fechaSalidaGaleria = fechaSalidaGaleria;
+	}
+
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+
+
+	public String getEstadoActual() {
     	return estadoActual;
     }
 
@@ -187,6 +219,8 @@ public abstract class Pieza {
     public void Autor(Autor autor) {
     	this.autor=autor;
     }
+    
+    
     
     
     
