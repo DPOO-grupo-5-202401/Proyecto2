@@ -47,32 +47,20 @@ public class Compra {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
-	public int getImpuestos() {
+	public double getImpuestos() {
 		return impuestos;
 	}
 	public void setImpuestos(int impuestos) {
 		this.impuestos = impuestos;
 	}
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	public boolean isValidado() {
-		return validado;
-	}
-	public void setValidado(boolean validado) {
-		this.validado = validado;
-	}
+
+
 	public Oferta getOfertaValidada() {
 		return ofertaValidada;
 	}
 	public void setOfertaValidada(Oferta ofertaValidada) {
 		this.ofertaValidada = ofertaValidada;
 	}
-	public Empleado getEmpleado() {
-		return empleado;
-	}
+
 
 }

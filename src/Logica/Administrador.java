@@ -25,6 +25,7 @@ public class Administrador extends Usuario {
 	public HashMap<String, Autor> autores;
 	public HashMap<String, Oferta> ofertas;
 	public HashMap<String, Compra> compras;
+	public static int contadorOfertas;
 	
 	
     // Constructor
@@ -117,6 +118,11 @@ public class Administrador extends Usuario {
 	public void crearAutor(String nombre) {
 		Autor nuevoAutor = new Autor(nombre); 
 		this.autores.put(nuevoAutor.getId(),nuevoAutor);
+	}
+	
+	public void crearOfertaTP(String id,Comprador comprador, Pieza pieza, boolean validada) {
+		Oferta nuevaOferta = new Oferta(id,comprador,pieza,validada); 
+		this.ofertas.put(nuevaOferta.getId(),nuevaOferta);
 	}
 	
 	public Autor crearRetornarAutor(String nombre) {
@@ -254,6 +260,22 @@ public class Administrador extends Usuario {
 		}
 	}
 	
+	public void cargarOfertas() {
+		ArrayList<String> textos = ArchivoTextoPlano.cargar("ofertas.csv");
+		for(String texto : textos) {
+			String []datos = texto.split(";");
+			
+
+			String cleanString = datos[0].replace("\uFEFF", "");
+			contadorOfertas = Integer.parseInt(cleanString);
+		
+			Comprador comprador = this.compradores.get(datos[1]);
+			Pieza pieza = this.inventarioHistorico.get(datos[2]);
+			
+			this.crearOfertaTP(datos[0],comprador,pieza,Boolean.parseBoolean(datos[3]));
+		}
+	}
+	
 	//Persistencia - Almacenar en Texto Plano
 	
 	//Almacenar Compradores
@@ -374,7 +396,8 @@ public class Administrador extends Usuario {
         else {
         	pieza.setEstadoActual("Bloqueada");
         	System.out.println("Pieza Bloqueda");
-        	Oferta nuevaOferta = new Oferta(comprador,pieza);
+        	Oferta nuevaOferta = new Oferta(contadorOfertas,comprador,pieza);
+        	contadorOfertas=+1;
         	this.ofertas.put(nuevaOferta.getId(),nuevaOferta);
         	return nuevaOferta;
         }
@@ -392,6 +415,7 @@ public class Administrador extends Usuario {
     	oferta.setValidada(true);
     	Compra nuevaCompra = new Compra(oferta);
     	this.compras.put(nuevaCompra.getId(),nuevaCompra);
+    	nuevaCompra.getOfertaValidada().getPieza().setEstadoActual("FueraDeGaleria");
     	
     	nuevaCompra.getOfertaValidada().getPieza().getHistoriaPieza().put(nuevaCompra.getId(), nuevaCompra);
     	

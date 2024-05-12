@@ -23,6 +23,7 @@ public class Padministrador {
 		administrador.cargarEsculturas();
 		administrador.cargarPinturas();
 		administrador.cargarFotografia();
+		administrador.cargarOfertas();
 		menu();
 	}
 
@@ -44,11 +45,12 @@ public class Padministrador {
 				System.out.println("5. Cargar Datos");
 				System.out.println("6. Guardar Datos");
 				System.out.println("7. Crear Oferta");
-				System.out.println("8. Confirmar Venta Obra");
-				System.out.println("9. Consultar Ventas");
-				System.out.println("10.Consultar Historia Pieza");
-				System.out.println("11.Consultar Historia Artista");
-				System.out.println("12.Consultar Historia Comprador");
+				System.out.println("8. Consultar Ofertas");
+				System.out.println("9. Confirmar Venta Obra");
+				System.out.println("10. Consultar Ventas");
+				System.out.println("11.Consultar Historia Pieza");
+				System.out.println("12.Consultar Historia Artista");
+				System.out.println("13.Consultar Historia Comprador");
 				System.out.println("13. Verificar Comprador para Subasta");
 				System.out.println("14. Iniciar Subasta");
 				op = sc.nextInt();
@@ -157,11 +159,18 @@ public class Padministrador {
 						}
 						
 					}else if(op == 8) {
-						Compra nuevaCompra = administrador.crearRetornarCompra(administrador.ofertas.get("000"));
+						HashMap<String, Oferta> map = administrador.getOfertas();
 						
-						
+				        for (Entry<String, Oferta> entry : map.entrySet()) {
+				            System.out.println(entry.getValue().getId() + ": " + entry.getValue().getPieza().getTitulo() + ". Comprada Por: " + entry.getValue().getComprador().getNombre() + " - " + entry.getValue().isValidada());
+				        }
 						
 					}else if(op == 9) {
+						Compra nuevaCompra = administrador.crearRetornarCompra(administrador.ofertas.get("OF001"));
+						
+						
+						
+					}else if(op == 10) {
 						HashMap<String, Compra> map = administrador.getCompras();
 						
 				        for (Entry<String, Compra> entry : map.entrySet()) {
@@ -169,7 +178,7 @@ public class Padministrador {
 				        }
 				        
 				        
-					}else if(op == 10) {
+					}else if(op == 11) {
 						HashMap<String, Compra> map = administrador.compras.get("000").getOfertaValidada().getPieza().getHistoriaPieza();
 						
 				        for (Entry<String, Compra> entry : map.entrySet()) {
