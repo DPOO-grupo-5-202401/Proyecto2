@@ -152,8 +152,8 @@ public class Administrador extends Usuario {
 	public void crearEscultura(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
     		String EstadoActual,String fechaSalidaGaleria,
     		boolean ValorFijo,int ValorInicial,int ValorMinimo,int Valor,
-    		Comprador DueñoActual, int peso,String observacion,Autor autor,  double alto,
-    		double ancho, double largo, boolean electricidad, String material) {
+    		Comprador DueñoActual, int peso,String observacion,Autor autor,  int alto,
+    		int ancho, int largo, boolean electricidad, String material) {
 		
 		Escultura nuevaEscultura = new Escultura(titulo,año,lugarDeCreacion,enExhibicion, 
 	    		EstadoActual,fechaSalidaGaleria,
@@ -250,7 +250,7 @@ public class Administrador extends Usuario {
 		}
 	}
 	
-	//Persistencia - Almacenar Compradores
+	//Persistencia - Almacenar en Texto Plano
 	
 	//Almacenar Compradores
 	public void almacenarCompradores() {
@@ -266,7 +266,8 @@ public class Administrador extends Usuario {
 	public void almacenarVideos() {
 		ArrayList<String> textos = new ArrayList<String>();		
         for (Entry<String, Video> entry : videos.entrySet()) {
-        		
+				System.out.println(entry.getValue().getTitulo());
+				
         		textos.add(entry.getValue().getTitulo() + ";" +
         	            entry.getValue().getAnio() + ";" +
         	            entry.getValue().getLugarDeCreacion() + ";" +
@@ -287,11 +288,80 @@ public class Administrador extends Usuario {
 		ArchivoTextoPlano.almacenar("videos.csv", textos);
 	}
 	
+	public void almacenarPinturas() {
+	    ArrayList<String> textos = new ArrayList<String>();		
+	    for (Entry<String, Pintura> entry : pinturas.entrySet()) {		
+	        textos.add(entry.getValue().getTitulo() + ";" +
+	                   entry.getValue().getAnio() + ";" +
+	                   entry.getValue().getLugarDeCreacion() + ";" +
+	                   entry.getValue().getEnExhibicion() + ";" +
+	                   entry.getValue().getFechaSalidaGaleria() + ";" +
+	                   entry.getValue().getEstadoActual() + ";" +
+	                   entry.getValue().getValorFijo() + ";" +
+	                   entry.getValue().getValorInicial() + ";" +
+	                   entry.getValue().getValorMinimo() + ";" +
+	                   entry.getValue().getValor() + ";" +
+	                   entry.getValue().getDueñoActual().getNombre() + ";" +
+	                   entry.getValue().getPeso() + ";" +
+	                   entry.getValue().getObservacion() + ";" +
+	                   entry.getValue().getAutor().getNombre() + ";" +
+	                   entry.getValue().getTecnica() + ";" +
+	                   entry.getValue().getEstilo() + ";" +
+	                   entry.getValue().getAltura() + ";" +
+	                   entry.getValue().getAncho() + "\n");
+	    }
+	    ArchivoTextoPlano.almacenar("pinturas.csv", textos);
+	}
 	
+	public void almacenarEsculturas() {
+	    ArrayList<String> textos = new ArrayList<String>();		
+	    for (Entry<String, Escultura> entry : esculturas.entrySet()) {		
+	        textos.add(entry.getValue().getTitulo() + ";" +
+	                   entry.getValue().getAnio() + ";" +
+	                   entry.getValue().getLugarDeCreacion() + ";" +
+	                   entry.getValue().getEnExhibicion() + ";" +
+	                   entry.getValue().getEstadoActual() + ";" +
+	                   entry.getValue().getFechaSalidaGaleria() + ";" +
+	                   entry.getValue().getValorFijo() + ";" +
+	                   entry.getValue().getValorInicial() + ";" +
+	                   entry.getValue().getValorMinimo() + ";" +
+	                   entry.getValue().getValor() + ";" +
+	                   entry.getValue().getDueñoActual().getNombre() + ";" +
+	                   entry.getValue().getPeso() + ";" +
+	                   entry.getValue().getObservacion() + ";" +
+	                   entry.getValue().getAutor().getNombre() + ";" +
+	                   entry.getValue().getAlto() + ";" +
+	                   entry.getValue().getAncho() + ";" +
+	                   entry.getValue().getLargo() + ";" +
+	                   entry.getValue().getElectricidad() + ";" +
+	                   entry.getValue().getMaterial() + "\n");
+	    }
+	    ArchivoTextoPlano.almacenar("esculturas.csv", textos);
+	}
 	
+	public void almacenarFotografias() {
+	    ArrayList<String> textos = new ArrayList<String>();		
+	    for (Entry<String, Fotografia> entry : fotografias.entrySet()) {		
+	        textos.add(entry.getValue().getTitulo() + ";" +
+	                   entry.getValue().getAnio() + ";" +
+	                   entry.getValue().getLugarDeCreacion() + ";" +
+	                   entry.getValue().getEnExhibicion() + ";" +
+	                   entry.getValue().getEstadoActual() + ";" +
+	                   entry.getValue().getFechaSalidaGaleria() + ";" +
+	                   entry.getValue().getValorFijo() + ";" +
+	                   entry.getValue().getValorInicial() + ";" +
+	                   entry.getValue().getValorMinimo() + ";" +
+	                   entry.getValue().getValor() + ";" +
+	                   entry.getValue().getDueñoActual().getNombre() + ";" +
+	                   entry.getValue().getPeso() + ";" +
+	                   entry.getValue().getObservacion() + ";" +
+	                   entry.getValue().getAutor().getNombre() + ";" +
+	                   entry.getValue().getResolucion() + ";" +
+	                   entry.getValue().getTipo() + "\n");
+	    }
+	    ArchivoTextoPlano.almacenar("fotografias.csv", textos);
+	}
 	
-
-
     
     public void registrarPago(Compra compra) {
         

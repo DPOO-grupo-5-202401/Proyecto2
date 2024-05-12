@@ -1,6 +1,5 @@
 package Logica;
 
-import java.util.Random;
 
 public class Video extends Pieza {
 	private int resolucion;

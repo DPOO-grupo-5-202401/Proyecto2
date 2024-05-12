@@ -77,7 +77,7 @@ public class Padministrador {
 							
 							if (intpieza == 1) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearEscultura("hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 5, 10.4, 10.5, false, "Piedra");
+								administrador.crearEscultura("hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 5, 10, 10, false, "Piedra");
 								System.out.println("Escultura Creada!");
 								break;
 							}
@@ -138,6 +138,9 @@ public class Padministrador {
 						
 						administrador.almacenarCompradores();
 						administrador.almacenarVideos();
+						administrador.almacenarEsculturas();
+						administrador.almacenarPinturas();
+						administrador.almacenarFotografias();
 					}
 				} catch (Exception e) {
 					System.out.println(e.getMessage());

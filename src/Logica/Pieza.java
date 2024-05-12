@@ -21,7 +21,7 @@ public abstract class Pieza {
     protected int valor;
     protected Comprador DueñoActual;
     protected Autor autor;
-    private double peso;
+    private int peso;
     private String observacion;
     
     public Pieza(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
@@ -112,7 +112,7 @@ public abstract class Pieza {
     	return DueñoActual;
     }
 
-    public double getPeso() {
+    public int getPeso() {
 		return peso;
 	}
     public String getObservacion() {
@@ -176,7 +176,7 @@ public abstract class Pieza {
     public void setDueñoActual(Comprador DueñoActual) {
     	this.DueñoActual= DueñoActual;
     }
-    public void setPeso(double peso) {
+    public void setPeso(int peso) {
 		this.peso=peso;
 	}
     

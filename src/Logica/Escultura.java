@@ -1,17 +1,17 @@
 package Logica;
 
 public class Escultura extends Pieza {
-	private double largo;
-	private double ancho;
-	private double alto;
+	private int largo;
+	private int ancho;
+	private int alto;
 	private Boolean electricidad;
 	private String material;
 	
 	public Escultura(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, String FechaSalidaGaleria,
     		String EstadoActual,
     		boolean ValorFijo,int ValorInicial,int ValorMinimo,int Valor,
-    		Comprador DueñoActual, int peso,String observacion,Autor autor,  double Alto,
-    		double Ancho, double Largo, boolean Electricidad, String Material) {
+    		Comprador DueñoActual, int peso,String observacion,Autor autor,int Alto,
+    		int Ancho, int Largo, boolean Electricidad, String Material) {
 		
 		super(titulo, año, lugarDeCreacion, enExhibicion , EstadoActual, ValorFijo,
 				ValorInicial, ValorMinimo, Valor, DueñoActual, peso, observacion, autor,FechaSalidaGaleria);
@@ -29,15 +29,15 @@ public class Escultura extends Pieza {
 
 
 	//Getters
-	public double getLargo() {
+	public int getLargo() {
 		return largo;
 	}
 	
-	public double getAncho() {
+	public int getAncho() {
 		return ancho;
 	}
 	
-	public double getAlto() {
+	public int getAlto() {
 		return alto;
 	}
 	
@@ -51,15 +51,15 @@ public class Escultura extends Pieza {
 	}
 	
 	//Setters
-	public void setLargo(double largo) {
+	public void setLargo(int largo) {
 		this.largo=largo;
 	}
 	
-	public void setAncho(double ancho) {
+	public void setAncho(int ancho) {
 		this.ancho=ancho;
 	}
 	
-	public void setAlto(double alto) {
+	public void setAlto(int alto) {
 		this.alto=alto;
 	}
 	
