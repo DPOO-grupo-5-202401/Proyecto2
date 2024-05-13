@@ -187,12 +187,7 @@ public class Padministrador {
 				            System.out.println(lista.get(i).getId() + ": " + lista.get(i).getOfertaValidada().getPieza().getTitulo() + ". Comprada Por: " + lista.get(i).getOfertaValidada().getComprador().getNombre());
 				        }
 					}else if(op == 12) {
-						HashMap<String, Autor> map2 = administrador.autores;
-						
-				        for (Entry<String, Autor> entry : map2.entrySet()) {
-				            System.out.println(entry.getKey());
-				        }
-						
+				
 						
 						Scanner scanner = new Scanner(System.in);
 						System.out.println("Nombre del artista a Consultar");
@@ -200,7 +195,7 @@ public class Padministrador {
 						
 						HashMap<String, Pieza> map = administrador.autores.get(artista).getPiezasQueHaHecho();
 				        for (Entry<String, Pieza> entry : map.entrySet()) {
-				            System.out.println(entry.getValue().getTitulo() + ". Año: " +entry.getValue().getAnio() + entry.getValue().getHistoriaPieza().get(0).getFecha());
+				            System.out.println(entry.getValue().getTitulo() + ". Año: " +entry.getValue().getAnio() + ". Fecha de Compra: " + entry.getValue().getHistoriaPieza().get(0).getFecha() + ". Valor Compra: " + entry.getValue().getHistoriaPieza().get(0).getValor());
 				        }
 					}
 					
