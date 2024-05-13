@@ -58,11 +58,18 @@ public class Padministrador {
 				op = sc.nextInt();
 				try {
 					if(op == 1) {
-						System.out.println("Digite nombre, numero de contacto, login y contraseña");
+						System.out.println("Digite nombre");
 						String nombre = sc.next();
+						
+						System.out.println("Digite numero de contacto");
 						int contacto = sc.nextInt();
+						
+						System.out.println("Digite login");
 						String login = sc.next();
+						
+						System.out.println("Digite contraseña");
 						String contrasena = sc.next();
+						
 						administrador.crearComprador(nombre, contacto, contrasena, login);
 						System.out.println("Comprador " + login + " creado con exito");
 						
@@ -86,16 +93,101 @@ public class Padministrador {
 							intpieza = sc.nextInt();
 							
 							if (intpieza == 1) {
-								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearEscultura("hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) , 5, 10, 10, false, "Piedra");
+								
+								System.out.println("Digite el nombre de la pieza");
+								String titulo = sc.next();
+								
+								System.out.println("Digite año de creacion de la pieza");
+								int anio = sc.nextInt();
+								
+								System.out.println("Digite lugar de creacion de la pieza");
+								String lugar = sc.next();
+								
+								System.out.println("¿La pieza se va a exhibicion? (true/false)");
+								boolean enExhibicion = Boolean.parseBoolean(sc.next().trim().toLowerCase());
+								
+								System.out.println("Digite hasta cuando estara la pieza en la galeria (YYYY-MM-DD)");
+								String fechaSalida = sc.next();
+								
+								System.out.println("Digite el valor de la pieza");
+								int valor = sc.nextInt();
+								
+								System.out.println("Digite el peso de la pieza");
+								int peso = sc.nextInt();
+								
+								System.out.println("Digite el autor de la pieza");
+								String autor = sc.next();
+								Autor nuevoAutor = null;
+								if (administrador.autores.containsKey(autor)) {
+									nuevoAutor = administrador.autores.get(autor);
+								}else {
+									nuevoAutor = administrador.crearRetornarAutor(autor);
+								}
+								
+								System.out.println("Digite el alto de la pieza");
+								int alto = sc.nextInt();
+								
+								System.out.println("Digite el ancho de la pieza");
+								int ancho = sc.nextInt();
+							
+								System.out.println("Digite el largo de la pieza");
+								int largo = sc.nextInt();
+								
+								System.out.println("Digite el material de la pieza");
+								String material = sc.next();
+								
+								
+								administrador.crearEscultura(titulo, anio, lugar, enExhibicion,fechaSalida, "ParaVenta", true, valor, 0, 0, administrador.compradores.get("Galeria"),peso, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) , alto,ancho,largo, false,material);
 								System.out.println("Escultura Creada!");
 								break;
 							}
 
 							
 							else if (intpieza == 2) {
-								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearPintura("Hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) , "Al Oleo", "Vanguardismo", 50,60);
+								System.out.println("Digite el nombre de la pieza");
+								String titulo = sc.next();
+								
+								System.out.println("Digite año de creacion de la pieza");
+								int anio = sc.nextInt();
+								
+								System.out.println("Digite lugar de creacion de la pieza");
+								String lugar = sc.next();
+								
+								System.out.println("¿La pieza se va a exhibicion? (true/false)");
+								boolean enExhibicion = Boolean.parseBoolean(sc.next().trim().toLowerCase());
+								
+								System.out.println("Digite hasta cuando estara la pieza en la galeria (YYYY-MM-DD)");
+								String fechaSalida = sc.next();
+								
+								System.out.println("Digite el valor de la pieza");
+								int valor = sc.nextInt();
+								
+								System.out.println("Digite el peso de la pieza");
+								int peso = sc.nextInt();
+								
+								System.out.println("Digite el autor de la pieza");
+								String autor = sc.next();
+								Autor nuevoAutor = null;
+								if (administrador.autores.containsKey(autor)) {
+									nuevoAutor = administrador.autores.get(autor);
+								}else {
+									nuevoAutor = administrador.crearRetornarAutor(autor);
+								}
+								
+								System.out.println("Digite la tecnica de la pieza");
+								String tecnica = sc.next();
+								
+								System.out.println("Digite el estilo de la pieza");
+								String estilo = sc.next();
+								
+								System.out.println("Digite la altura de la pieza");
+								int altura = sc.nextInt();
+								
+								System.out.println("Digite ancho de la pieza");
+								int ancho = sc.nextInt();
+								
+								
+								administrador.crearPintura(titulo, anio,lugar, enExhibicion,fechaSalida, "ParaVenta", true, valor, 0, 0, administrador.compradores.get("Galeria"), peso, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) , tecnica, estilo, altura,ancho);
 								System.out.println("Pintura Creada!");
 
 								break;
@@ -103,16 +195,89 @@ public class Padministrador {
 							}
 							
 							else if (intpieza == 3) {
-								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearVideo("holaVideo", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) ,1920,60);
+								System.out.println("Digite el nombre de la pieza");
+								String titulo = sc.next();
+								
+								System.out.println("Digite año de creacion de la pieza");
+								int anio = sc.nextInt();
+								
+								System.out.println("Digite lugar de creacion de la pieza");
+								String lugar = sc.next();
+								
+								System.out.println("¿La pieza se va a exhibicion? (true/false)");
+								boolean enExhibicion = Boolean.parseBoolean(sc.next().trim().toLowerCase());
+								
+								System.out.println("Digite hasta cuando estara la pieza en la galeria (YYYY-MM-DD)");
+								String fechaSalida = sc.next();
+								
+								System.out.println("Digite el valor de la pieza");
+								int valor = sc.nextInt();
+								
+								System.out.println("Digite el peso de la pieza");
+								int peso = sc.nextInt();
+								
+								System.out.println("Digite el autor de la pieza");
+								String autor = sc.next();
+								Autor nuevoAutor = null;
+								if (administrador.autores.containsKey(autor)) {
+									nuevoAutor = administrador.autores.get(autor);
+								}else {
+									nuevoAutor = administrador.crearRetornarAutor(autor);
+								}
+								
+								
+								System.out.println("Digite la altura de la pieza");
+								int resolucion = sc.nextInt();
+								
+								System.out.println("Digite la duracion del video");
+								int duracion = sc.nextInt();
+								
+								administrador.crearVideo(titulo, anio, lugar,enExhibicion,fechaSalida, "EnVenta", true, valor, 0, 0, administrador.compradores.get("Galeria"), peso, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) ,resolucion,duracion);
 								System.out.println("Video Creado!");
 								break;
 								
 							}
 							
 							else if (intpieza == 4) {
-								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearFotografia("holaFoto", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) , 1920, "Analoga");
+								
+								System.out.println("Digite el nombre de la pieza");
+								String titulo = sc.next();
+								
+								System.out.println("Digite año de creacion de la pieza");
+								int anio = sc.nextInt();
+								
+								System.out.println("Digite lugar de creacion de la pieza");
+								String lugar = sc.next();
+								
+								System.out.println("¿La pieza se va a exhibicion? (true/false)");
+								boolean enExhibicion = Boolean.parseBoolean(sc.next().trim().toLowerCase());
+								
+								System.out.println("Digite hasta cuando estara la pieza en la galeria (YYYY-MM-DD)");
+								String fechaSalida = sc.next();
+								
+								System.out.println("Digite el valor de la pieza");
+								int valor = sc.nextInt();
+								
+								System.out.println("Digite el peso de la pieza");
+								int peso = sc.nextInt();
+								
+								System.out.println("Digite el autor de la pieza");
+								String autor = sc.next();
+								Autor nuevoAutor = null;
+								if (administrador.autores.containsKey(autor)) {
+									nuevoAutor = administrador.autores.get(autor);
+								}else {
+									nuevoAutor = administrador.crearRetornarAutor(autor);
+								}
+								
+								
+								System.out.println("Digite la altura de la pieza");
+								int resolucion = sc.nextInt();
+								
+								System.out.println("Digite el tipo de foto (Analoga o Digital)");
+								String tipo = sc.next();
+								
+								administrador.crearFotografia(titulo, anio, lugar, enExhibicion,fechaSalida, "EnVenta", true, valor, 0, 0, administrador.compradores.get("Galeria"), peso, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) , resolucion,tipo);
 								System.out.println("Pieza Creada!");
 								break;
 								
@@ -153,7 +318,14 @@ public class Padministrador {
 						administrador.almacenarFotografias();
 						
 					}else if(op == 7) {
-						Oferta nuevaOferta = administrador.crearRetornarOferta(administrador.compradores.get("Olivi0"), administrador.inventarioHistorico.get("holaVideo"));
+						System.out.println("Digite el Login del comprador que hace la oferta");
+						String login = sc.next();
+						
+						System.out.println("Digite el nombre de la pieza a realizar una oferta");
+						String piezaNombre = sc.next();
+						
+						
+						Oferta nuevaOferta = administrador.crearRetornarOferta(administrador.compradores.get(login), administrador.inventarioHistorico.get(piezaNombre));
 						if (nuevaOferta == null) {
 							System.out.println("La oferta no pudo ser creada, verifica si la pieza si esta disponible para compra");
 						}else {

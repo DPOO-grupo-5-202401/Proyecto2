@@ -1,264 +1,247 @@
 package Presentacion;
 
-import Logica.Comprador;
-import Logica.Pieza;
-import Logica.Autor;
+import Logica.Administrador;
 import Logica.Compra;
-import Logica.Escultura;
-import Logica.Fotografia;
-import Logica.Pintura;
-import Logica.Video;
+import Logica.Comprador;
+import Logica.Oferta;
+import Logica.Pieza;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Map.Entry;
-import java.util.Map;
 import java.util.UUID;
-
-
+import java.util.Map.Entry;
 
 public class Pcomprador {
-    //compradores
-    private static Comprador[] compradores = {
-        new Comprador("Camilo", 1234567890, "password1", "camilo"),
-        new Comprador("Javier", 1176543210, "password2", "javier")
-    };
-    
-    //Autores
-    private static Autor[] autores = {
-            new Autor("Pablo Picasso"),
-            new Autor("Frida Kahlo"),
-            new Autor("Vincent van Gogh")
-        };
-    //Piezas
-    private static Map<String, Pieza> inventarioGlobal = Map.of(
-    		"E2", new Escultura()
-    		
-    		"E1", new Escultura("E1", 1504, "UK", false, "Disponible", 2000000, 1000000, 3000000, 50000, "Camilo", 200, "obs", "Pablo Picasso", "21-02-2022"),
-            "E1", new Escultura("E1", "David", 1504, "Miguel Ángel", 2000000, "Mármol", 5, 2, 3, 1000, false),
-            "F1", new Fotografia("F1", "Migrant Mother", 1936, "Dorothea Lange", 100000, "Blanco y negro"),
-            "P1", new Pintura("P1", "La Noche Estrellada", 1889, "Vincent van Gogh", 2500000, "Óleo", 92, 73),
-            "V1", new Video("V1", "The Clock", 2010, "Christian Marclay", 300000, 1440)
-        );
-    
 
-    //Buscar un comprador por su login
-    private static Comprador buscarComprador(String login, String contrasena) {
-        for (Comprador c : compradores) {
-            if (c.getLogin().equals(login) && c.getContrasena().equals(contrasena)) {
-                return c;
-            }
-        }
-        return null;
-    }
-    
-    // Buscar un autor por nombre
-    private static Autor buscarAutor(String nombre) {
-        for (Autor a : autores) {
-            if (a.getNombre().equalsIgnoreCase(nombre)) {
-                return a;
-            }
-        }
-        return null;
-    }
+    private static Administrador administrador; // Administrador para manejar la carga de datos
 
-    //Menú principal
-    private static void mostrarMenuComprador() {
-    	System.out.println("\n");
-        System.out.println("*****Bienvenido Comprador*****");
-		System.out.println("\n");
-		System.out.println("Digite una opcion");
-        System.out.println("1. Ver historia de una pieza");
-        System.out.println("2. Ver historia de un artista");
-        System.out.println("3. Gestionar compra");
-        System.out.println("4. Realizar compra");
-        System.out.println("5. Salir");
-        System.out.print("Seleccione una opción: ");
-    }
+    public static void main(String[] args) {
+        administrador = new Administrador("Juan", "A1", "A1");
+        cargarDatos(); 
 
-    // Ver historia de una pieza
-    private static void verHistoriaPieza(Comprador comprador) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID de la pieza: ");
-        String idPieza = scanner.nextLine();
+        System.out.println("Bienvenido Comprador");
         
-     // Buscar la pieza en el inventario
-        Pieza pieza = comprador.getPiezasCompradas().get(idPieza);
+        Comprador comprador = new Comprador("Camilo",12345678,"C1","C1");
 
-        if (pieza != null) {
-            System.out.println("Mostrando historia de la pieza:");
-            System.out.println("ID: " + pieza.getId());
-            System.out.println("Título: " + pieza.getTitulo());
-            System.out.println("Año: " + pieza.getAnio());
-            System.out.println("Autor: " + pieza.getAutor());
-            System.out.println("Precio: " + pieza.getValor());
-        } else {
-            System.out.println("No se encontró ninguna pieza con el ID " + idPieza);
-        }
+        menuComprador(comprador, scanner);
+        
+
+        guardarDatos(); 
+        scanner.close();
     }
 
-    // Ver historia de un artista
-    private static void verHistoriaArtista(Comprador comprador) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el nombre del artista: ");
-        String nombreArtista = scanner.nextLine();
-        Autor autor = buscarAutor(nombreArtista);
-        
-        if (autor != null) {
-            System.out.println("\nMostrando historia del artista " + autor.getNombre() + ":");
-            for (Map.Entry<String, Pieza> entry : autor.getPiezasQueHaHecho().entrySet()) {
-                Pieza pieza = entry.getValue();
-                System.out.println("ID: " + pieza.getId() + ", Título: " + pieza.getTitulo() + ", Año: " + pieza.getAnio() + ", Precio: " + pieza.getValor());
-            }
-        } else {
-            System.out.println("No se encontró ningún artista con el nombre " + nombreArtista);
-        }
+    private static void cargarDatos() {
+        administrador.cargarCompradores();
+        administrador.cargarEsculturas();
+        administrador.cargarFotografias();
+        administrador.cargarPinturas();
+        administrador.cargarVideos();
     }
 
+    private static void guardarDatos() {
+        administrador.almacenarCompradores();
+        administrador.almacenarEsculturas();
+        administrador.almacenarFotografias();
+        administrador.almacenarPinturas();
+        administrador.almacenarVideos();
+    }
 
-    // Gestionar compras
-    private static void gestionarCompras(Comprador comprador) {
-    	Scanner scanner = new Scanner(System.in);
+    private static void menuComprador(Comprador comprador, Scanner scanner) {
         int opcion;
-
         do {
-            System.out.println("\n*** Gestión de Compras ***");
-            System.out.println("1. Ver todas las compras");
-            System.out.println("2. Ver detalles de una compra");
-            System.out.println("3. Salir");
+            System.out.println("1. Ver historia de una pieza");
+            System.out.println("2. Ver historia de un artista");
+            System.out.println("3. Realizar Compra");
+            System.out.println("4. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine(); 
 
             switch (opcion) {
                 case 1:
-                    verTodasLasCompras(comprador);
+                    verHistoriaPieza(scanner);
                     break;
                 case 2:
-                    verDetallesCompra(comprador, scanner);
+                    verHistoriaArtista(scanner);
                     break;
                 case 3:
-                    System.out.println("Saliendo de Gestión de Compras...");
-                    break;
-                default:
-                    System.out.println("Opción no válida, intente nuevamente.");
-                    break;
-            }
-        } while (opcion != 3);
-    }
-    
- // Ver todas las compras
-    private static void verTodasLasCompras(Comprador comprador) {
-        System.out.println("\nCompras realizadas:");
-        for (Map.Entry<String, Compra> entry : comprador.getCompras().entrySet()) {
-            Compra compra = entry.getValue();
-            System.out.println("ID: " + compra.getId() + ", Fecha: " + compra.getFecha() + ", Estado: " + compra.getEstado());
-        }
-    }
-
-    // Ver detalles de una compra
-    private static void verDetallesCompra(Comprador comprador, Scanner scanner) {
-        System.out.print("Ingrese el ID de la compra: ");
-        String idCompra = scanner.nextLine();
-        Compra compra = comprador.getCompras().get(idCompra);
-
-        if (compra != null) {
-            System.out.println("\nDetalles de la compra:");
-            System.out.println("ID: " + compra.getId());
-            System.out.println("Fecha: " + compra.getFecha());
-            System.out.println("Valor: " + compra.getValor());
-            System.out.println("Impuestos: " + compra.getImpuestos());
-            System.out.println("Estado: " + compra.getEstado());
-            System.out.println("Validado: " + (compra.isValidado() ? "Sí" : "No"));
-            
-        } else {
-            System.out.println("No se encontró ninguna compra con el ID " + idCompra);
-        }
-    }
-    
- // Realizar compra
-    private static void realizarCompra(Comprador comprador) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID de la pieza que desea comprar: ");
-        String idPieza = scanner.nextLine();
-        Pieza pieza = inventarioGlobal.get(idPieza);
-
-        if (pieza != null) {
-            System.out.println("Pieza encontrada:");
-            System.out.println("ID: " + pieza.getId());
-            System.out.println("Título: " + pieza.getTitulo());
-            System.out.println("Año: " + pieza.getAnio());
-            System.out.println("Autor: " + pieza.getAutor());
-            System.out.println("Precio: " + pieza.getValor());
-
-            System.out.print("¿Desea comprar esta pieza? (S/N): ");
-            String respuesta = scanner.nextLine();
-            if (respuesta.equalsIgnoreCase("S")) {
-                // Crear una nueva compra
-                String idCompra = UUID.randomUUID().toString();
-                String fecha = "2024-05-10"; 
-                int valor = (int) pieza.getValor();
-                int impuestos = (int) (valor * 0.15); 
-                Compra compra = new Compra(null);
-
-                // Registrar la compra
-                comprador.registrarCompra(compra);
-                comprador.agregarPiezaComprada(pieza);
-                System.out.println("Compra realizada con éxito. ID de la compra: " + idCompra);
-            } else {
-                System.out.println("Compra cancelada.");
-            }
-        } else {
-            System.out.println("No se encontró ninguna pieza con el ID " + idPieza);
-        }
-    }
-
-    // Menú para comprador 
-    private static void menuComprador(Comprador comprador) {
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
-        do {
-            System.out.println("\nBienvenido " + comprador.getLogin());
-            mostrarMenuComprador();
-            opcion = scanner.nextInt();
-            scanner.nextLine();
-            switch (opcion) {
-                case 1:
-                    verHistoriaPieza(comprador);
-                    break;
-                case 2:
-                    verHistoriaArtista(comprador);
-                    break;
-                case 3:
-                    gestionarCompras(comprador);
-                    break;
+                	realizarCompra(comprador, scanner);
                 case 4:
-                	realizarCompra(comprador);
-                	break;
-                case 5:
                     System.out.println("Cerrando sesión...");
                     break;
                 default:
-                    System.out.println("Opción no válida, intente nuevamente.");
+                    System.out.println("Opción no válida. Intente nuevamente.");
                     break;
             }
-        } while (opcion != 5);
+        } while (opcion != 4);
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Bienvenido Comprador");
-        System.out.print("Ingrese su login: ");
-        String login = scanner.nextLine();
-        System.out.print("Ingrese su contraseña: ");
-        String contrasena = scanner.nextLine();
+    
+    //Historia de una PIEZA	
+    private static void verHistoriaPieza(Scanner scanner) {
+        System.out.print("Ingrese el título de la pieza: ");
+        String tituloPieza = scanner.nextLine().trim().toLowerCase();
 
-        Comprador comprador = buscarComprador(login, contrasena);
+        // Buscar piezas por título en el inventario histórico
+        boolean found = false;
+        for (Pieza pieza : administrador.getInventarioHistorico().values()) {
+            if (pieza.getTitulo().toLowerCase().equals(tituloPieza)) {
+                displayPiezaDetails(pieza);
+                found = true;
+                
+                break;
+            }
+        }
 
-        if (comprador != null) {
-            menuComprador(comprador);
-        } else {
-            System.out.println("Credenciales incorrectas. Intente nuevamente.");
+        if (!found) {
+            System.out.println("No se encontró ninguna pieza con el título '" + tituloPieza + "'");
         }
     }
+
+    private static void displayPiezaDetails(Pieza pieza) {
+        System.out.println("Mostrando detalles de la pieza encontrada:");
+        System.out.println("ID: " + pieza.getId());
+        System.out.println("Título: " + pieza.getTitulo());
+        System.out.println("Año: " + pieza.getAnio());
+        System.out.println("Autor: " + (pieza.getAutor() != null ? pieza.getAutor().getNombre() : "Desconocido"));
+        System.out.println("Estado actual: " + pieza.getEstadoActual());
+        System.out.println("En exhibición: " + (pieza.getEnExhibicion() ? "Sí" : "No"));
+
+        
+        if (pieza.getValorFijo()) {
+            System.out.println("Tipo de venta: Precio fijo");
+            System.out.println("Precio: " + pieza.getValor());
+        } else {
+            System.out.println("Tipo de venta: Subasta");
+            System.out.println("Valor inicial: " + pieza.getValorInicial());
+            System.out.println("Valor mínimo: " + pieza.getValorMinimo());
+        }
+    }
+
+
+
+    //Historia de un ARTISTA
+    private static void verHistoriaArtista(Scanner scanner) {
+        System.out.print("Ingrese el nombre del artista: ");
+        String nombreArtista = scanner.nextLine().trim().toLowerCase();
+
+        
+        boolean found = false;
+        for (Pieza pieza : administrador.getInventarioHistorico().values()) {
+            if (pieza.getAutor() != null && pieza.getAutor().getNombre().toLowerCase().equals(nombreArtista)) {
+                if (!found) {
+                    System.out.println("Mostrando obras de " + pieza.getAutor().getNombre() + ":");
+                    found = true; 
+                }
+                mostrarDetallesPieza(pieza);
+            }
+        }
+
+        if (!found) {
+            System.out.println("No se encontraron obras del artista '" + nombreArtista + "'.");
+        }
+    }
+
+    
+    private static void mostrarDetallesPieza(Pieza pieza) {
+        System.out.println("ID: " + pieza.getId());
+        System.out.println("Título: " + pieza.getTitulo());
+        System.out.println("Año: " + pieza.getAnio());
+        System.out.println("Valor: " + pieza.getValor());
+        
+    }
+    
+    //Realizar COMPRA
+    private static void realizarCompra(Comprador comprador, Scanner scanner) {
+        System.out.print("Ingrese el título de la pieza que desea comprar: ");
+        String tituloPieza = scanner.nextLine().trim().toLowerCase();
+
+        ArrayList<Pieza> piezasEncontradas = new ArrayList<>();
+        for (Pieza pieza : administrador.getInventarioHistorico().values()) {
+            if (pieza.getTitulo().toLowerCase().equals(tituloPieza)) {
+                piezasEncontradas.add(pieza);
+            }
+        }
+
+        if (piezasEncontradas.isEmpty()) {
+            System.out.println("No se encontró ninguna pieza con el título '" + tituloPieza + "'.");
+            return;
+        }
+
+        Pieza piezaSeleccionada = elegirPieza(piezasEncontradas, scanner);
+        if (piezaSeleccionada == null) {
+            return;  
+        }
+
+       
+        //if (!piezaSeleccionada.getEstadoActual().equals("ParaVenta")) {
+          //  System.out.println("Esta pieza no está disponible para la venta.");
+            //return;
+        //}
+
+       // if (!piezaSeleccionada.getValorFijo()) {
+         //   System.out.println("Esta pieza está destinada a ser vendida en subasta y no puede ser comprada directamente.");
+           // return;
+        //}
+
+        System.out.println("Detalles de la pieza seleccionada:");
+        mostrarDetallesPieza(piezaSeleccionada);
+
+        System.out.print("¿Desea proceder con la compra? (S/N): ");
+        String respuesta = scanner.nextLine().trim();
+        if (respuesta.equalsIgnoreCase("S")) {
+            procesarCompra(piezaSeleccionada, comprador);
+        } else {
+            System.out.println("Compra cancelada.");
+        }
+    }
+    
+    private static void procesarCompra(Pieza pieza, Comprador comprador) {
+        
+        Oferta ofertaSimulada = new Oferta(administrador.contadorOfertas,comprador, pieza);
+
+        
+        Compra nuevaCompra = new Compra(ofertaSimulada);
+        
+        administrador.getCompras().put(nuevaCompra.getId(), nuevaCompra);
+        pieza.setEstadoActual("Vendida");  // Actualizar el estado de la pieza
+        pieza.setDueñoActual(comprador);   // Actualizar el dueño de la pieza
+
+        System.out.println("Compra realizada con éxito. ID de la compra: " + nuevaCompra.getId());
+        System.out.println("Fecha de la compra: " + nuevaCompra.getFecha());
+        System.out.println("Valor de la compra: " + nuevaCompra.getValor());
+        System.out.println("Impuestos aplicados: " + nuevaCompra.getImpuestos());
+    }
+
+
+
+    private static String generarIdCompra() {
+    	return UUID.randomUUID().toString();
+	}
+
+	private static Pieza elegirPieza(ArrayList<Pieza> piezas, Scanner scanner) {
+        if (piezas.size() == 1) {
+            return piezas.get(0);
+        }
+
+        System.out.println("Se encontraron múltiples piezas con ese título. Por favor seleccione una:");
+        int index = 1;
+        for (Pieza pieza : piezas) {
+            System.out.println(index++ + ". " + pieza.getTitulo() + " - ID: " + pieza.getId() + " - Estado: " + pieza.getEstadoActual());
+        }
+        System.out.print("Ingrese el número de la pieza que desea comprar o 0 para cancelar: ");
+        int eleccion = scanner.nextInt();
+        scanner.nextLine();  
+
+        if (eleccion > 0 && eleccion <= piezas.size()) {
+            return piezas.get(eleccion - 1);
+        }
+        System.out.println("Selección inválida o cancelada.");
+        return null;
+    }
+    
 }

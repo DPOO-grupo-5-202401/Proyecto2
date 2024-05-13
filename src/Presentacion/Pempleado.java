@@ -6,104 +6,62 @@ import Logica.Fotografia;
 import Logica.Pieza;
 import Logica.Pintura;
 import Logica.Video;
+import Logica.Administrador;
 import Logica.Autor;
+import Logica.Comprador;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Pempleado {
-    // Empleados
-    private static Empleado[] empleados = {
-        new Empleado("Maria", "E001", "maria", "password1", "Cajera"),
-        new Empleado("Jose", "E002", "jose", "password2", "Administrador")
-    };
-    
-    // Autores
-    private static Autor[] autores = {
-        new Autor("Pablo Picasso"),
-        new Autor("Frida Kahlo"),
-        new Autor("Vincent van Gogh")
-    };
 
-    // Inventario
-    private static Map<String, Pieza> inventarioGlobal = Map.of(
-        "E1", new Escultura("E1", "David", 1504, "Miguel Ángel", 2000000, "Mármol", 5, 2, 3, 1000, false),
-        "F1", new Fotografia("F1", "Migrant Mother", 1936, "Dorothea Lange", 100000, "Blanco y negro"),
-        "P1", new Pintura("P1", "La Noche Estrellada", 1889, "Vincent van Gogh", 2500000, "Óleo", 92, 73),
-        "V1", new Video("V1", "The Clock", 2010, "Christian Marclay", 300000, 1440)
-    );
-    
-    // Buscar un autor por nombre
-    private static Autor buscarAutor(String nombre) {
-        for (Autor a : autores) {
-            if (a.getNombre().equalsIgnoreCase(nombre)) {
-                return a;
-            }
-        }
-        return null;
+    private static Administrador administrador; // Administrador para manejar la carga de datos
+
+    public static void main(String[] args) {
+        administrador = new Administrador("Juan", "A1", "A1");
+        cargarDatos(); 
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bienvenido Empleado");
+        
+        Empleado empleado = new Empleado("Luis","12345678","E1","E1","p2");
+
+        menuEmpleado(empleado, scanner);
+        
+
+        guardarDatos(); 
+        scanner.close();
     }
-    
-    // Buscar empleado por login
-    private static Empleado buscarEmpleado(String login, String contrasena) {
-        for (Empleado e : empleados) {
-            if (e.getLogin().equals(login) && e.getContrasena().equals(contrasena)) {
-                return e;
-            }
-        }
-        return null;
+
+    private static void cargarDatos() {
+        administrador.cargarCompradores();
+        administrador.cargarEsculturas();
+        administrador.cargarFotografias();
+        administrador.cargarPinturas();
+        administrador.cargarVideos();
     }
+
+    private static void guardarDatos() {
+        administrador.almacenarCompradores();
+        administrador.almacenarEsculturas();
+        administrador.almacenarFotografias();
+        administrador.almacenarPinturas();
+        administrador.almacenarVideos();
+    }
+
 
     // Menú
-    private static void mostrarMenuEmpleado() {
-        System.out.println("\n***** Bienvenido Empleado *****");
-        System.out.println("1. Ver historia de una pieza");
-        System.out.println("2. Ver historia de un artista");
-        System.out.println("3. Salir");
-        System.out.print("Seleccione una opción: ");
-    }
-
-    // Historia de una pieza
-    private static void verHistoriaPieza(Scanner scanner) {
-        System.out.print("Ingrese el ID de la pieza: ");
-        String idPieza = scanner.nextLine();
-
-        Pieza pieza = inventarioGlobal.get(idPieza);
-        if (pieza != null) {
-            System.out.println("Mostrando historia de la pieza:");
-            System.out.println("ID: " + pieza.getId());
-            System.out.println("Título: " + pieza.getTitulo());
-            System.out.println("Año: " + pieza.getAnio());
-            System.out.println("Autor: " + pieza.getAutor());
-            System.out.println("Precio: " + pieza.getValor());
-        } else {
-            System.out.println("No se encontró ninguna pieza con el ID " + idPieza);
-        }
-    }
-
-    // Historia de un artista
-    private static void verHistoriaArtista(Scanner scanner) {
-        System.out.print("Ingrese el nombre del artista: ");
-        String nombreArtista = scanner.nextLine();
-
-        Autor autor = buscarAutor(nombreArtista);
-        if (autor != null) {
-            System.out.println("\nMostrando historia del artista " + autor.getNombre() + ":");
-            autor.getPiezasQueHaHecho().forEach((id, pieza) -> {
-                System.out.println("ID: " + pieza.getId() + ", Título: " + pieza.getTitulo() + ", Año: " + pieza.getAnio() + ", Precio: " + pieza.getValor());
-            });
-        } else {
-            System.out.println("No se encontró ningún artista con el nombre " + nombreArtista);
-        }
-    }
-
-    // Menú interactivo para el empleado
-    private static void menuEmpleado(Empleado empleado) {
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
-        do {
-            mostrarMenuEmpleado();
+    private static void menuEmpleado(Empleado empleado, Scanner scanner) {
+    	int opcion;
+    	do {
+            System.out.println("1. Ver historia de una pieza");
+            System.out.println("2. Ver historia de un artista");
+            System.out.println("3. Salir");
+            System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); 
+
             switch (opcion) {
                 case 1:
                     verHistoriaPieza(scanner);
@@ -117,27 +75,81 @@ public class Pempleado {
                 default:
                     System.out.println("Opción no válida. Intente nuevamente.");
                     break;
-            }
-        } while (opcion != 3);
-        scanner.close();
+            } 
+    	}while (opcion != 3);
     }
+    
+  //Historia de una PIEZA	
+    private static void verHistoriaPieza(Scanner scanner) {
+        System.out.print("Ingrese el título de la pieza: ");
+        String tituloPieza = scanner.nextLine().trim().toLowerCase();
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Bienvenido Empleado");
-        System.out.print("Ingrese su login: ");
-        String login = scanner.nextLine();
-        System.out.print("Ingrese su contraseña: ");
-        String contrasena = scanner.nextLine();
+        // Buscar piezas por título en el inventario histórico
+        boolean found = false;
+        for (Pieza pieza : administrador.getInventarioHistorico().values()) {
+            if (pieza.getTitulo().toLowerCase().equals(tituloPieza)) {
+                displayPiezaDetails(pieza);
+                found = true;
+                
+                break;
+            }
+        }
 
-        Empleado empleado = buscarEmpleado(login, contrasena);
-        if (empleado != null) {
-            menuEmpleado(empleado);
-        } else {
-            System.out.println("Credenciales incorrectas. Intente nuevamente.");
+        if (!found) {
+            System.out.println("No se encontró ninguna pieza con el título '" + tituloPieza + "'");
         }
     }
+
+    private static void displayPiezaDetails(Pieza pieza) {
+        System.out.println("Mostrando detalles de la pieza encontrada:");
+        System.out.println("ID: " + pieza.getId());
+        System.out.println("Título: " + pieza.getTitulo());
+        System.out.println("Año: " + pieza.getAnio());
+        System.out.println("Autor: " + (pieza.getAutor() != null ? pieza.getAutor().getNombre() : "Desconocido"));
+        System.out.println("Estado actual: " + pieza.getEstadoActual());
+        System.out.println("En exhibición: " + (pieza.getEnExhibicion() ? "Sí" : "No"));
+
+        
+        if (pieza.getValorFijo()) {
+            System.out.println("Tipo de venta: Precio fijo");
+            System.out.println("Precio: " + pieza.getValor());
+        } else {
+            System.out.println("Tipo de venta: Subasta");
+            System.out.println("Valor inicial: " + pieza.getValorInicial());
+            System.out.println("Valor mínimo: " + pieza.getValorMinimo());
+        }
+    }
+
+
+
+    //Historia de un ARTISTA
+    private static void verHistoriaArtista(Scanner scanner) {
+        System.out.print("Ingrese el nombre del artista: ");
+        String nombreArtista = scanner.nextLine().trim().toLowerCase();
+
+        
+        boolean found = false;
+        for (Pieza pieza : administrador.getInventarioHistorico().values()) {
+            if (pieza.getAutor() != null && pieza.getAutor().getNombre().toLowerCase().equals(nombreArtista)) {
+                if (!found) {
+                    System.out.println("Mostrando obras de " + pieza.getAutor().getNombre() + ":");
+                    found = true; 
+                }
+                mostrarDetallesPieza(pieza);
+            }
+        }
+
+        if (!found) {
+            System.out.println("No se encontraron obras del artista '" + nombreArtista + "'.");
+        }
+    }
+
+    private static void mostrarDetallesPieza(Pieza pieza) {
+        System.out.println("ID: " + pieza.getId());
+        System.out.println("Título: " + pieza.getTitulo());
+        System.out.println("Año: " + pieza.getAnio());
+        System.out.println("Valor: " + pieza.getValor());
+        
+    }
+    
 }
-
-
-
