@@ -1,6 +1,7 @@
 package Presentacion;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -22,8 +23,9 @@ public class Padministrador {
 		administrador.cargarVideos();
 		administrador.cargarEsculturas();
 		administrador.cargarPinturas();
-		administrador.cargarFotografia();
+		administrador.cargarFotografias();
 		administrador.cargarOfertas();
+		administrador.cargarCompras();
 		menu();
 	}
 
@@ -85,7 +87,7 @@ public class Padministrador {
 							
 							if (intpieza == 1) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearEscultura("hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 5, 10, 10, false, "Piedra");
+								administrador.crearEscultura("hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) , 5, 10, 10, false, "Piedra");
 								System.out.println("Escultura Creada!");
 								break;
 							}
@@ -93,7 +95,7 @@ public class Padministrador {
 							
 							else if (intpieza == 2) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearPintura("Hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , "Al Oleo", "Vanguardismo", 50,60);
+								administrador.crearPintura("Hola", 2023, "Colombia", false,"2025-05-05", "ParaVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) , "Al Oleo", "Vanguardismo", 50,60);
 								System.out.println("Pintura Creada!");
 
 								break;
@@ -102,7 +104,7 @@ public class Padministrador {
 							
 							else if (intpieza == 3) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearVideo("holaVideo", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) ,1920,60);
+								administrador.crearVideo("holaVideo", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) ,1920,60);
 								System.out.println("Video Creado!");
 								break;
 								
@@ -110,7 +112,7 @@ public class Padministrador {
 							
 							else if (intpieza == 4) {
 								Autor nuevoAutor = administrador.crearRetornarAutor("William");
-								administrador.crearFotografia("holaFoto", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getId()) , 1920, "Analoga");
+								administrador.crearFotografia("holaFoto", 2023, "Colombia", false,"2025-05-05", "EnVenta", true, 50, 0, 0, administrador.compradores.get("Galeria"), 90, "Sin Observacion",administrador.autores.get(nuevoAutor.getNombre()) , 1920, "Analoga");
 								System.out.println("Pieza Creada!");
 								break;
 								
@@ -139,7 +141,7 @@ public class Padministrador {
 						administrador.cargarVideos();
 						administrador.cargarEsculturas();
 						administrador.cargarPinturas();
-						administrador.cargarFotografia();
+						administrador.cargarFotografias();
 									
 	
 					}else if(op == 6) {
@@ -179,10 +181,26 @@ public class Padministrador {
 				        
 				        
 					}else if(op == 11) {
-						HashMap<String, Compra> map = administrador.compras.get("000").getOfertaValidada().getPieza().getHistoriaPieza();
 						
-				        for (Entry<String, Compra> entry : map.entrySet()) {
-				            System.out.println(entry.getValue().getId() + ": " + entry.getValue().getOfertaValidada().getPieza().getTitulo() + ". Comprada Por: " + entry.getValue().getOfertaValidada().getComprador().getNombre());
+				        List<Compra> lista = administrador.compras.get("101").getOfertaValidada().getPieza().getHistoriaPieza();
+				        for (int i = 0; i < lista.size(); i++) {
+				            System.out.println(lista.get(i).getId() + ": " + lista.get(i).getOfertaValidada().getPieza().getTitulo() + ". Comprada Por: " + lista.get(i).getOfertaValidada().getComprador().getNombre());
+				        }
+					}else if(op == 12) {
+						HashMap<String, Autor> map2 = administrador.autores;
+						
+				        for (Entry<String, Autor> entry : map2.entrySet()) {
+				            System.out.println(entry.getKey());
+				        }
+						
+						
+						Scanner scanner = new Scanner(System.in);
+						System.out.println("Nombre del artista a Consultar");
+						String artista = scanner.nextLine();
+						
+						HashMap<String, Pieza> map = administrador.autores.get(artista).getPiezasQueHaHecho();
+				        for (Entry<String, Pieza> entry : map.entrySet()) {
+				            System.out.println(entry.getValue().getTitulo() + ". Año: " +entry.getValue().getAnio() + entry.getValue().getHistoriaPieza().get(0).getFecha());
 				        }
 					}
 					

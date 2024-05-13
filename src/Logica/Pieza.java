@@ -1,8 +1,10 @@
 package Logica;
 import java.util.Random;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ArrayList;
 
 
@@ -23,7 +25,7 @@ public abstract class Pieza {
     protected Autor autor;
     private int peso;
     private String observacion;
-    private HashMap<String, Compra> historiaPieza;
+    private List<Compra> historiaPieza;
     
     public Pieza(String titulo,int año,String lugarDeCreacion,boolean enExhibicion, 
     		String EstadoActual,
@@ -56,7 +58,7 @@ public abstract class Pieza {
     	this.peso=peso;
     	this.observacion=observacion;
     	this.autor=autor;
-		this.historiaPieza = new HashMap<>();
+		this.historiaPieza = new ArrayList<>();
     }
     
     
@@ -100,12 +102,12 @@ public abstract class Pieza {
 	}
 
 
-	public HashMap<String, Compra> getHistoriaPieza() {
+	public List<Compra> getHistoriaPieza() {
 		return historiaPieza;
 	}
 
 
-	public void setHistoriaPieza(HashMap<String, Compra> historiaPieza) {
+	public void setHistoriaPieza(List<Compra> historiaPieza) {
 		this.historiaPieza = historiaPieza;
 	}
 

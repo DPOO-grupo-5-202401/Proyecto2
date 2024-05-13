@@ -26,6 +26,7 @@ public class Administrador extends Usuario {
 	public HashMap<String, Oferta> ofertas;
 	public HashMap<String, Compra> compras;
 	public static int contadorOfertas;
+	public static int contadorCompras;
 	
 	
     // Constructor
@@ -117,7 +118,7 @@ public class Administrador extends Usuario {
     //Crear Autor
 	public void crearAutor(String nombre) {
 		Autor nuevoAutor = new Autor(nombre); 
-		this.autores.put(nuevoAutor.getId(),nuevoAutor);
+		this.autores.put(nuevoAutor.getNombre(),nuevoAutor);
 	}
 	
 	public void crearOfertaTP(String id,Comprador comprador, Pieza pieza, boolean validada) {
@@ -125,9 +126,19 @@ public class Administrador extends Usuario {
 		this.ofertas.put(nuevaOferta.getId(),nuevaOferta);
 	}
 	
+	public void crearCompraTP(String id,Oferta ofertaValidada,String fecha) {
+		Compra nuevaCompra = new Compra(id,ofertaValidada,fecha); 
+		this.compras.put(nuevaCompra.getId(),nuevaCompra);
+    	nuevaCompra.getOfertaValidada().getPieza().getHistoriaPieza().add(nuevaCompra);
+    	nuevaCompra.getOfertaValidada().getPieza().setEstadoActual("FueraDeGaleria");
+    	
+	}
+	
+	
+	
 	public Autor crearRetornarAutor(String nombre) {
 		Autor nuevoAutor = new Autor(nombre); 
-		this.autores.put(nuevoAutor.getId(),nuevoAutor);
+		this.autores.put(nuevoAutor.getNombre(),nuevoAutor);
 		return nuevoAutor;
 	}
 	
@@ -141,6 +152,7 @@ public class Administrador extends Usuario {
 				ValorInicial,ValorMinimo,Valor,DueñoActual,peso,observacion,autor,resolucion,duracion);
 		this.inventarioHistorico.put(nuevoVideo.getTitulo(),nuevoVideo);
 		this.videos.put(nuevoVideo.getTitulo(),nuevoVideo);
+		autor.getPiezasQueHaHecho().put(nuevoVideo.getTitulo(), nuevoVideo);
 	}
 	
 	
@@ -157,6 +169,7 @@ public class Administrador extends Usuario {
 		
 		this.inventarioHistorico.put(nuevaPintura.getTitulo(),nuevaPintura);
 		this.pinturas.put(nuevaPintura.getTitulo(),nuevaPintura);
+		autor.getPiezasQueHaHecho().put(nuevaPintura.getTitulo(), nuevaPintura);
 	}
 	
 	//Crear Escultura
@@ -174,6 +187,7 @@ public class Administrador extends Usuario {
 		
 		this.inventarioHistorico.put(nuevaEscultura.getTitulo(),nuevaEscultura);
 		this.esculturas.put(nuevaEscultura.getTitulo(),nuevaEscultura);
+		autor.getPiezasQueHaHecho().put(nuevaEscultura.getTitulo(), nuevaEscultura);
 	}
 	
 	
@@ -189,6 +203,7 @@ public class Administrador extends Usuario {
 				autor, resolucion,tipo);
 		this.inventarioHistorico.put(nuevaFotografia.getTitulo(),nuevaFotografia);
 		this.fotografias.put(nuevaFotografia.getTitulo(),nuevaFotografia);
+		autor.getPiezasQueHaHecho().put(nuevaFotografia.getTitulo(), nuevaFotografia);
 	}
 	
 	
@@ -211,7 +226,7 @@ public class Administrador extends Usuario {
 			this.crearVideo(datos[0], Integer.parseInt(datos[1]), datos[2], Boolean.parseBoolean(datos[3]),
 					datos[4], datos[5], Boolean.parseBoolean(datos[6]),
 					Integer.parseInt(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]), this.compradores.get(datos[10]), Integer.parseInt(datos[11]), datos[12],
-					this.autores.get(nuevoAutor.getId()), Integer.parseInt(datos[14]), Integer.parseInt(datos[15]));
+					this.autores.get(nuevoAutor.getNombre()), Integer.parseInt(datos[14]), Integer.parseInt(datos[15]));
 		}
 	}
 	
@@ -219,43 +234,59 @@ public class Administrador extends Usuario {
 		ArrayList<String> textos = ArchivoTextoPlano.cargar("esculturas.csv");
 		for(String texto : textos) {
 			String []datos = texto.split(";");
-			Autor nuevoAutor = this.crearRetornarAutor(datos[13]);
+			Autor nuevoAutor = null;
+			if (this.autores.containsKey(datos[13])) {
+				nuevoAutor = this.autores.get(datos[13]);
+			}else {
+				nuevoAutor = this.crearRetornarAutor(datos[13]);
+			}
+			
 			
 			this.crearEscultura(datos[0],Integer.parseInt(datos[1]),datos[2],Boolean.parseBoolean(datos[3]), 
 		    		datos[4],datos[5],
 		    		Boolean.parseBoolean(datos[6]),Integer.parseInt(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]),
-		    		this.compradores.get(datos[10]), Integer.parseInt(datos[11]) , datos[12],this.autores.get(nuevoAutor.getId()),  Integer.parseInt(datos[14]), Integer.parseInt(datos[15]),
+		    		this.compradores.get(datos[10]), Integer.parseInt(datos[11]) , datos[12],this.autores.get(nuevoAutor.getNombre()),  Integer.parseInt(datos[14]), Integer.parseInt(datos[15]),
 		    		Integer.parseInt(datos[16]), Boolean.parseBoolean(datos[17]), datos[18]);
 		}
 	}
 
-	
+
 
 	public void cargarPinturas() {
 		ArrayList<String> textos = ArchivoTextoPlano.cargar("pinturas.csv");
 		for(String texto : textos) {
 			String []datos = texto.split(";");
-			Autor nuevoAutor = this.crearRetornarAutor(datos[13]);
+			Autor nuevoAutor = null;
+			if (this.autores.containsKey(datos[13])) {
+				nuevoAutor = this.autores.get(datos[13]);
+			}else {
+				nuevoAutor = this.crearRetornarAutor(datos[13]);
+			}
 			
 			this.crearPintura(datos[0],Integer.parseInt(datos[1]),datos[2],Boolean.parseBoolean(datos[3]), 
 		    		datos[4],datos[5],
 		    		Boolean.parseBoolean(datos[6]),Integer.parseInt(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]),
-		    		this.compradores.get(datos[10]), Integer.parseInt(datos[11]) , datos[12],this.autores.get(nuevoAutor.getId()), datos[14],datos[15],
+		    		this.compradores.get(datos[10]), Integer.parseInt(datos[11]) , datos[12],this.autores.get(nuevoAutor.getNombre()), datos[14],datos[15],
 		    		Integer.parseInt(datos[16]), Integer.parseInt(datos[17]));
 		}
 	}
 	
 
-	public void cargarFotografia() {
-		ArrayList<String> textos = ArchivoTextoPlano.cargar("fotografia.csv");
+	public void cargarFotografias() {
+		ArrayList<String> textos = ArchivoTextoPlano.cargar("fotografias.csv");
 		for(String texto : textos) {
 			String []datos = texto.split(";");
-			Autor nuevoAutor = this.crearRetornarAutor(datos[13]);
+			Autor nuevoAutor = null;
+			if (this.autores.containsKey(datos[13])) {
+				nuevoAutor = this.autores.get(datos[13]);
+			}else {
+				nuevoAutor = this.crearRetornarAutor(datos[13]);
+			}
 			
 			this.crearFotografia(datos[0],Integer.parseInt(datos[1]),datos[2],Boolean.parseBoolean(datos[3]), 
 		    		datos[4],datos[5],
 		    		Boolean.parseBoolean(datos[6]),Integer.parseInt(datos[7]), Integer.parseInt(datos[8]), Integer.parseInt(datos[9]),
-		    		this.compradores.get(datos[10]), Integer.parseInt(datos[11]) , datos[12],this.autores.get(nuevoAutor.getId()),
+		    		this.compradores.get(datos[10]), Integer.parseInt(datos[11]) , datos[12],this.autores.get(nuevoAutor.getNombre()),
 		    		Integer.parseInt(datos[14]), datos[15]);
 		}
 	}
@@ -273,6 +304,23 @@ public class Administrador extends Usuario {
 			Pieza pieza = this.inventarioHistorico.get(datos[2]);
 			
 			this.crearOfertaTP(cleanString,comprador,pieza,Boolean.parseBoolean(datos[3]));
+		}
+	}
+	
+	public void cargarCompras() {
+		ArrayList<String> textos = ArchivoTextoPlano.cargar("compras.csv");
+		for(String texto : textos) {
+			String []datos = texto.split(";");
+			
+
+			String cleanString = datos[0].replace("\uFEFF", "");
+
+			String cleanString2 = datos[1].replace("\uFEFF", "");
+			contadorCompras = Integer.parseInt(cleanString);
+		
+			Oferta oferta = this.ofertas.get(cleanString2);
+			
+			this.crearCompraTP(cleanString,oferta,datos[2]);
 		}
 	}
 	
@@ -414,10 +462,11 @@ public class Administrador extends Usuario {
     	oferta.getPieza().setDueñoActual(nuevoDueño);
     	oferta.setValidada(true);
     	Compra nuevaCompra = new Compra(oferta);
+    	contadorCompras=+1;
     	this.compras.put(nuevaCompra.getId(),nuevaCompra);
     	nuevaCompra.getOfertaValidada().getPieza().setEstadoActual("FueraDeGaleria");
+    	nuevaCompra.getOfertaValidada().getPieza().getHistoriaPieza().add(nuevaCompra);
     	
-    	nuevaCompra.getOfertaValidada().getPieza().getHistoriaPieza().put(nuevaCompra.getId(), nuevaCompra);
     	
     	return nuevaCompra;
     }

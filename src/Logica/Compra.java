@@ -31,16 +31,10 @@ public class Compra {
 	}
 	
 	public Compra(String id, Oferta ofertaValidada,String fecha) {
-		String numero = String.format("%03d", contadorCompras);
-		this.id = numero;
-		contadorCompras++;
-		
-    	Date currentDate = new Date();
+		this.id = id;
+	
     	
-    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    	String dateString = formatter.format(currentDate);
-    	
-    	this.fecha = dateString;
+    	this.fecha = fecha;
     	
 		this.valor = ofertaValidada.getPieza().getValor();
 		this.impuestos = (valor * 0.19);

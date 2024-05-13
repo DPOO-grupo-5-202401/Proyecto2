@@ -1,5 +1,5 @@
-El Pensador;2010;Leticia;false;ParaVenta;17/09/2024;true;0;0;2500;Galeria;16;Sin Observacion;Pablo Picasso;30;30;30;true;Granito
-La Piedad;2003;Leticia;false;ParaVenta;5/08/2024;true;0;0;5000;Galeria;15;Sin Observacion;Frida Kahlo;30;30;30;false;Piedra
-Venus de Milo;2001;Leticia;true;ParaSubasta;29/09/2024;false;3000;5000;0;Galeria;18;Sin Observacion;Vincent van Gogh;30;30;30;false;Marmol
-David;2019;Leticia;false;EnExhibicion;11/10/2024;false;0;0;0;Galeria;16;Sin Observacion;Leonardo da Vinci;30;30;30;true;Piedra
-La Victoria de Samotracia;2007;Leticia;true;EnExhibicion;24/10/2024;false;0;0;0;Galeria;19;Sin Observacion;Georgia O'Keeffe;30;30;30;false;Marmol
+Estatua1;2010;Leticia;false;ParaVenta;17/09/2024;true;0;0;2500;Galeria;16;Sin Observacion;Autor1;30;30;30;true;Granito
+Estatua2;2003;Leticia;false;ParaVenta;5/08/2024;true;0;0;5000;Galeria;15;Sin Observacion;Autor2;30;30;30;false;Piedra
+Estatua3;2001;Leticia;true;ParaSubasta;29/09/2024;false;3000;5000;0;Galeria;18;Sin Observacion;Autor3;30;30;30;false;Marmol
+Estatua4;2019;Leticia;false;EnExhibicion;11/10/2024;false;0;0;0;Galeria;16;Sin Observacion;Autor2;30;30;30;true;Piedra
+Estatua5;2007;Leticia;true;EnExhibicion;24/10/2024;false;0;0;0;Galeria;19;Sin Observacion;Autor1;30;30;30;false;Marmol
