@@ -53,8 +53,8 @@ public class Padministrador {
 				System.out.println("11.Consultar Historia Pieza");
 				System.out.println("12.Consultar Historia Artista");
 				System.out.println("13.Consultar Historia Comprador");
-				System.out.println("13. Verificar Comprador para Subasta");
-				System.out.println("14. Iniciar Subasta");
+				System.out.println("14. Verificar Comprador para Subasta");
+				System.out.println("15. Iniciar Subasta");
 				op = sc.nextInt();
 				try {
 					if(op == 1) {
@@ -194,6 +194,17 @@ public class Padministrador {
 						String artista = scanner.nextLine();
 						
 						HashMap<String, Pieza> map = administrador.autores.get(artista).getPiezasQueHaHecho();
+				        for (Entry<String, Pieza> entry : map.entrySet()) {
+				            System.out.println(entry.getValue().getTitulo() + ". Año: " +entry.getValue().getAnio() + ". Fecha de Compra: " + entry.getValue().getHistoriaPieza().get(0).getFecha() + ". Valor Compra: " + entry.getValue().getHistoriaPieza().get(0).getValor());
+				        }
+					}else if(op == 13) {
+				
+						
+						Scanner scanner = new Scanner(System.in);
+						System.out.println("Login del Comprador a consultar");
+						String comprador = scanner.nextLine();
+						
+						HashMap<String, Pieza> map = administrador.compradores.get(comprador).getPiezasqueHaTenido();
 				        for (Entry<String, Pieza> entry : map.entrySet()) {
 				            System.out.println(entry.getValue().getTitulo() + ". Año: " +entry.getValue().getAnio() + ". Fecha de Compra: " + entry.getValue().getHistoriaPieza().get(0).getFecha() + ". Valor Compra: " + entry.getValue().getHistoriaPieza().get(0).getValor());
 				        }

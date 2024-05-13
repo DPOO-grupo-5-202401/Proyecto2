@@ -129,8 +129,11 @@ public class Administrador extends Usuario {
 	public void crearCompraTP(String id,Oferta ofertaValidada,String fecha) {
 		Compra nuevaCompra = new Compra(id,ofertaValidada,fecha); 
 		this.compras.put(nuevaCompra.getId(),nuevaCompra);
+		Comprador nuevoDueño = nuevaCompra.getOfertaValidada().getComprador();
     	nuevaCompra.getOfertaValidada().getPieza().getHistoriaPieza().add(nuevaCompra);
     	nuevaCompra.getOfertaValidada().getPieza().setEstadoActual("FueraDeGaleria");
+    	Pieza pieza = nuevaCompra.getOfertaValidada().getPieza();
+    	nuevoDueño.getPiezasqueHaTenido().put(pieza.getTitulo(), pieza);
     	
 	}
 	
@@ -466,7 +469,8 @@ public class Administrador extends Usuario {
     	this.compras.put(nuevaCompra.getId(),nuevaCompra);
     	nuevaCompra.getOfertaValidada().getPieza().setEstadoActual("FueraDeGaleria");
     	nuevaCompra.getOfertaValidada().getPieza().getHistoriaPieza().add(nuevaCompra);
-    	
+    	Pieza pieza = nuevaCompra.getOfertaValidada().getPieza();
+    	nuevoDueño.getPiezasqueHaTenido().put(pieza.getTitulo(), pieza);
     	
     	return nuevaCompra;
     }
