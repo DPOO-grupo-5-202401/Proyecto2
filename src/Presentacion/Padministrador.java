@@ -340,7 +340,11 @@ public class Padministrador {
 				        }
 						
 					}else if(op == 9) {
-						Compra nuevaCompra = administrador.crearRetornarCompra(administrador.ofertas.get("101"));
+						
+						System.out.println("Digite el ID de la oferta a validar");
+						String ID = sc.next();
+						
+						Compra nuevaCompra = administrador.crearRetornarCompra(administrador.ofertas.get(ID));
 						
 						
 						
@@ -353,8 +357,10 @@ public class Padministrador {
 				        
 				        
 					}else if(op == 11) {
+						System.out.println("Digite el nombre de la pieza a consultar su historia");
+						String piezaNombre = sc.next();
 						
-				        List<Compra> lista = administrador.compras.get("101").getOfertaValidada().getPieza().getHistoriaPieza();
+				        List<Compra> lista = administrador.getInventarioHistorico().get(piezaNombre).getHistoriaPieza();
 				        for (int i = 0; i < lista.size(); i++) {
 				            System.out.println(lista.get(i).getId() + ": " + lista.get(i).getOfertaValidada().getPieza().getTitulo() + ". Comprada Por: " + lista.get(i).getOfertaValidada().getComprador().getNombre());
 				        }
@@ -380,7 +386,42 @@ public class Padministrador {
 				        for (Entry<String, Pieza> entry : map.entrySet()) {
 				            System.out.println(entry.getValue().getTitulo() + ". Año: " +entry.getValue().getAnio() + ". Fecha de Compra: " + entry.getValue().getHistoriaPieza().get(0).getFecha() + ". Valor Compra: " + entry.getValue().getHistoriaPieza().get(0).getValor());
 				        }
+					}else if(op == 14) {
+				
+						
+						Scanner scanner = new Scanner(System.in);
+						System.out.println("Nombre del Comprador a Verificar");
+						String comprador = scanner.nextLine();
+						
+						System.out.println("ID de la Subasta");
+						String ID = scanner.nextLine();
+						
+						administrador.VerificarComprador(ID,comprador);
+						
+						System.out.println("Comprador Verificado con Exito!");							
+						
+
+					}else if(op == 15) {
+				
+						
+						Scanner scanner = new Scanner(System.in);
+						System.out.println("Ingrese ID de la subasta a iniciar");
+						String ID = scanner.nextLine();
+						
+						
+						System.out.println("La puja actual es 1000");
+						System.out.println("Ingrese el Login del comprador que desee aumentar la puja (+500)");
+						String puja = scanner.nextLine();
+						
+						System.out.println("Este comprador comprara la obra (s/n)");
+						String decision = scanner.nextLine();
+						
+						
+						System.out.println("Subasta terminada con Exito!");							
+						
+
 					}
+					
 					
 					
 					

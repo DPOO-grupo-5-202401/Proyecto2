@@ -104,9 +104,9 @@ public class Administrador extends Usuario {
 
 
     // Verificar un comprador
-    public void verificarComprador(Comprador comprador) {
-        compradoresVerificados.put(comprador.getNombre(), comprador);
-    }
+   // public void verificarComprador(Comprador comprador) {
+     //   compradoresVerificados.put(comprador.getNombre(), comprador);
+    //}
     
     //Crear Comprador
 	public void crearComprador(String nombre, int numeroDeContacto, String contrasena, String login) {
@@ -495,6 +495,10 @@ public class Administrador extends Usuario {
 		LocalTime horaActual = LocalTime.now();
 		String hora = horaActual.toString();
 		Movimiento nuevoMovimiento = new Movimiento(id,hora,valor,tipoMovimiento,comprador);
+	}
+	
+	public void VerificarComprador(String id,String login) {
+		
 	}
 
 
